@@ -1,0 +1,29 @@
+{
+    "name": "dprmc/laravel-kroll-kcp-data-feed",
+    "description": "Laravel models for the Kroll KCP Data Feed.",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^9.4",
+        "php-coveralls/php-coveralls": "^2.4",
+        "laravel/framework": "^6.18.25"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "michaeldrennen",
+            "email": "michaeldrennen74@gmail.com"
+        }
+    ],
+    "require": {},
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "DPRMC\\LaravelKrollKCPDataFeed\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-0": {
+            "Tests\\": "tests"
+        }
+    }
+}
