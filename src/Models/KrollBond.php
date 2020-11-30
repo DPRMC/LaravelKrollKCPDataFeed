@@ -74,8 +74,8 @@ class KrollBond extends Model {
         // or not enough data to determine the cast for certain.  (i.e. Is the one value available coincidentally an
         // integer? In these cases, float will be used to err on the side of caution )
 
-        self::closing_balance                       => 'float',
-        self::accumulated_interest_shortfalls       => 'float'
+        self::closing_balance                       => 'string',
+        self::accumulated_interest_shortfalls       => 'string'
 
 
     ];
