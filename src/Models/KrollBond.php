@@ -32,16 +32,6 @@ class KrollBond extends Model {
 
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    /*
-     * Relationship between portfolios and specific asset type example
-     * public function commonStock() {
-        return $this->hasMany(  CommonStockCurrentHolding::class,
-                                'portfolio_id',
-                                'id');
-    }*/
 
     public function __construct( array $attributes = [] ) {
         parent::__construct( $attributes );
