@@ -80,10 +80,9 @@ class KrollBond extends Model {
 
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function portfolioGroups() {
+
+    // Relations
+    public function deal() {
         return $this->belongsTo( KrollDeal::class,
                                      KrollDeal::uuid,
                                      KrollBond::uuid );
