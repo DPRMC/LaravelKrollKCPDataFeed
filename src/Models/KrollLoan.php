@@ -2,9 +2,7 @@
 
 namespace DPRMC\LaravelKrollKCPDataFeed\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class KrollLoan extends Model {
+class KrollLoan extends AbstractKrollModel {
 
     public $table = '';
     public $primaryKey = self::uuid;
@@ -146,5 +144,6 @@ class KrollLoan extends Model {
         self::servicer_commentary_period                 => 'string',
         self::servicer_commentary                        => 'string'
     ];
+
 
 }

@@ -2,9 +2,8 @@
 
 namespace DPRMC\LaravelKrollKCPDataFeed\Models;
 
-use Illuminate\Database\Eloquent\Model;
 
-class KrollLoanGroup extends Model {
+class KrollLoanGroup extends AbstractKrollModel {
 
     public $table        = '';
     public $primaryKey   = self::uuid;
@@ -172,10 +171,6 @@ class KrollLoanGroup extends Model {
         return $this->belongsTo( KrollDeal::class,
                                  self::deal_uuid,
                                  KrollDeal::uuid );
-    }
-
-    public function __construct( array $attributes = [] ) {
-        parent::__construct( $attributes );
     }
 
 }

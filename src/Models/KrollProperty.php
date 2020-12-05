@@ -2,9 +2,7 @@
 
 namespace DPRMC\LaravelKrollKCPDataFeed\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class KrollProperty extends Model {
+class KrollProperty extends AbstractKrollModel {
 
     public $table                           = 'kroll_kcp_data_feed_property';
     public $primaryKey                      = self::uuid;
@@ -183,6 +181,5 @@ class KrollProperty extends Model {
         self::comp3_net_adjustments                      => 'string',
         self::comp4_net_adjustments                      => 'string'
     ];
-
 }
 

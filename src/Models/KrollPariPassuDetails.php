@@ -2,9 +2,7 @@
 
 namespace DPRMC\LaravelKrollKCPDataFeed\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class KrollPariPassuDetails extends Model {
+class KrollPariPassuDetails extends AbstractKrollModel {
 
     public $table                           = 'kroll_kcp_data_feed_pari_passu_details';
     public $primaryKey                      = self::uuid;

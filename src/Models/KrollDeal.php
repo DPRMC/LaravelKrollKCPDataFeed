@@ -2,9 +2,7 @@
 
 namespace DPRMC\LaravelKrollKCPDataFeed\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class KrollDeal extends Model {
+class KrollDeal extends AbstractKrollModel {
 
     public $table        = 'kroll_kcp_data_feed_deals';
     public $primaryKey   = self::uuid;
@@ -51,6 +49,21 @@ class KrollDeal extends Model {
         self::projected_loss_percentage_original_balance => 'string',
     ];
 
+    protected $fillable = [
+        self::uuid,
+        self::remit_date,
+        self::generated_date,
+        self::name,
+        self::lead_analyst,
+        self::lead_analyst_email,
+        self::lead_analyst_phone_number,
+        self::backup_analyst,
+        self::backup_analyst_email,
+        self::backup_analyst_phone_number,
+        self::projected_loss_percentage_current_balance,
+        self::projected_loss_percentage_original_balance,
+    ];
+
 
     public function bonds() {
         return $this->hasMany( KrollBond::class,
@@ -74,6 +87,5 @@ class KrollDeal extends Model {
                                KrollLoanGroup::deal_uuid,
                                KrollDeal::uuid );
     }
-
 
 }

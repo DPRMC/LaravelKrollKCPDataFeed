@@ -2,9 +2,7 @@
 
 namespace DPRMC\LaravelKrollKCPDataFeed\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class KrollBond extends Model {
+class KrollBond extends AbstractKrollModel {
 
     public $table        = 'kroll_bonds';
     public $primaryKey   = 'uuid';
@@ -88,13 +86,5 @@ class KrollBond extends Model {
                                      KrollBond::uuid );
     }
 
-
-
-
-
-    public function __construct( array $attributes = [] ) {
-        parent::__construct( $attributes );
-        $this->connection = env( 'DB_CONNECTION_FIMS_API_MODULES_PORTFOLIO' );
-    }
 
 }
