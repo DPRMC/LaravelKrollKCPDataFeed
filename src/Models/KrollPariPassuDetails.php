@@ -2,9 +2,16 @@
 
 namespace DPRMC\LaravelKrollKCPDataFeed\Models;
 
+
+/**
+ * This guy is not currently being used.
+ * Right now the pari passu details are stored in a JSON column.
+ * Class KrollPariPassuDetails
+ * @package DPRMC\LaravelKrollKCPDataFeed\Models
+ */
 class KrollPariPassuDetails extends AbstractKrollModel {
 
-    public $table                           = 'kroll_kcp_data_feed_pari_passu_details';
+    public $table                           = 'kroll_pari_passu_details';
     public $primaryKey                      = self::uuid;
     public $incrementing                    = FALSE;
     public $keyType                         = 'string';

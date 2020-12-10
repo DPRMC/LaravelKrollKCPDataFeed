@@ -4,12 +4,8 @@ namespace DPRMC\LaravelKrollKCPDataFeed\Models;
 
 class KrollLoan extends AbstractKrollModel {
 
-    public $table = '';
-    public $primaryKey = self::uuid;
-    public $incrementing = FALSE;
-    public $keyType = 'string';
+    public $table = 'kroll_loans';
 
-    const uuid                                       = 'uuid';
     const appraised_value                            = 'appraised_value';
     const appraisal_date                             = 'appraisal_date';
     const kbra_concluded_value                       = 'kbra_concluded_value';
@@ -70,8 +66,6 @@ class KrollLoan extends AbstractKrollModel {
     const servicer_commentary                        = 'servicer_commentary';
     const pari_passu_details                         = 'pari_passu_details';
     const property                                   = 'property';
-    const created_at                                 = 'created_at';
-    const updated_at                                 = 'updated_at';
 
 
     protected $casts = [
@@ -144,6 +138,5 @@ class KrollLoan extends AbstractKrollModel {
         self::servicer_commentary_period                 => 'string',
         self::servicer_commentary                        => 'string'
     ];
-
 
 }

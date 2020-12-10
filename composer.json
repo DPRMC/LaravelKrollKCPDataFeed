@@ -16,6 +16,7 @@
         }
     ],
     "require": {
+        "ext-json": "*",
         "dprmc/kroll-kcp-data-feed-api-client": "dev-master"
     },
     "minimum-stability": "dev",

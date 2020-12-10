@@ -5,11 +5,7 @@ namespace DPRMC\LaravelKrollKCPDataFeed\Models;
 class KrollBond extends AbstractKrollModel {
 
     public $table        = 'kroll_bonds';
-    public $primaryKey   = 'uuid';
-    public $incrementing = FALSE;
-    public $keyType      = 'string';
 
-    const uuid                                  = 'uuid';
     const deal_uuid                             = 'deal_uuid';
     const name                                  = 'name';
     const kbra_credit_profile                   = 'kbra_credit_profile';
@@ -36,8 +32,6 @@ class KrollBond extends AbstractKrollModel {
     const kbra_optimistic_prepayments_applied   = 'kbra_optimistic_prepayments_applied';
     const kbra_optimistic_losses_applied        = 'kbra_optimistic_losses_applied';
     const accumulated_interest_shortfalls       = 'accumulated_interest_shortfalls';
-    const created_at                            = 'created_at';
-    const updated_at                            = 'updated_at';
 
     protected $casts = [
         self::uuid                                  => 'string',
@@ -72,18 +66,20 @@ class KrollBond extends AbstractKrollModel {
         // or not enough data to determine the cast for certain.  (i.e. Is the one value available coincidentally an
         // integer? In these cases, float will be used to err on the side of caution )
 
-        self::closing_balance                       => 'string',
-        self::accumulated_interest_shortfalls       => 'string'
+        self::closing_balance                 => 'string',
+        self::accumulated_interest_shortfalls => 'string',
 
 
     ];
 
 
+
+
     // Relations
     public function deal() {
         return $this->belongsTo( KrollDeal::class,
-                                     KrollDeal::uuid,
-                                     KrollBond::uuid );
+                                 KrollDeal::uuid,
+                                 KrollBond::uuid );
     }
 
 

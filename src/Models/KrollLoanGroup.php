@@ -5,14 +5,9 @@ namespace DPRMC\LaravelKrollKCPDataFeed\Models;
 
 class KrollLoanGroup extends AbstractKrollModel {
 
-    public $table        = '';
-    public $primaryKey   = self::uuid;
-    public $incrementing = FALSE;
-    public $keyType      = 'string';
+    public $table = 'kroll_loan_groups';
 
-    const deal_uuid = 'deal_uuid';
-
-    const uuid                                       = 'uuid';
+    const deal_uuid                                  = 'deal_uuid';
     const name                                       = 'name';
     const city                                       = 'city';
     const state                                      = 'state';
@@ -48,8 +43,10 @@ class KrollLoanGroup extends AbstractKrollModel {
     const pari_passu                                 = 'pari_passu';
     const pari_passu_id                              = 'pari_passu_id';
     const total_pari_passu_debt                      = 'total_pari_passu_debt';
-    const pari_deal_in_control                       = 'pari_deal_in_control';
-    const pari_kbra_master_deal                      = 'pari_kbra_master_deal';
+    const pari_deal_in_control_uuid                  = 'pari_deal_in_control_uuid';
+    const pari_deal_in_control_name                  = 'pari_deal_in_control_name';
+    const pari_kbra_master_deal_uuid                 = 'pari_kbra_master_deal_uuid';
+    const pari_kbra_master_deal_name                 = 'pari_kbra_master_deal_name';
     const pari_passu_details                         = 'pari_passu_details';
     const portfolio_level_valuation                  = 'portfolio_level_valuation';
     const url                                        = 'url';
@@ -112,8 +109,10 @@ class KrollLoanGroup extends AbstractKrollModel {
         self::pari_passu                                 => 'boolean',
         self::pari_passu_id                              => 'string',
         self::total_pari_passu_debt                      => 'float',
-        self::pari_deal_in_control                       => 'string',
-        self::pari_kbra_master_deal                      => 'string',
+        self::pari_deal_in_control_uuid                  => 'string',
+        self::pari_deal_in_control_name                  => 'string',
+        self::pari_kbra_master_deal_uuid                 => 'string',
+        self::pari_kbra_master_deal_name                 => 'string',
         self::pari_passu_details                         => 'array',
         self::portfolio_level_valuation                  => 'boolean',
         self::url                                        => 'string',
@@ -130,8 +129,6 @@ class KrollLoanGroup extends AbstractKrollModel {
         self::most_recent_as_of_date                     => 'date',
         self::preceding_noi                              => 'float',
         self::preceding_as_of_date                       => 'date',
-        self::created_at                                 => 'datetime',
-        self::updated_at                                 => 'datetime',
 
         // These cast values are guesses.  There was either no data available to determine the cast
         // or not enough data to determine the cast for certain.  (i.e. Is the one value available coincidentally an

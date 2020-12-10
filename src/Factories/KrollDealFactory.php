@@ -5,7 +5,6 @@ namespace DPRMC\LaravelKrollKCPDataFeed\Factories;
 use DPRMC\KrollKCPDataFeedAPIClient\Bond;
 use DPRMC\KrollKCPDataFeedAPIClient\Deal;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollDeal;
-use Illuminate\Database\Eloquent\Model;
 
 class KrollDealFactory {
 
@@ -27,12 +26,12 @@ class KrollDealFactory {
         $objectVars[ KrollDeal::generated_date ] = $objectVars[ 'generatedDate' ];
         unset( $objectVars[ 'generatedDate' ] );
 
-        $krollDeal = new KrollDeal( $objectVars );
 
-        $krollBonds = $this->getKrollBondObjects( $deal );
+        $krollDeal = KrollDeal::firstOrCreate( [ KrollDeal::uuid => $objectVars[ 'uuid' ] ], $objectVars );
+        $krollDeal->save();
 
-        print_r( $krollBonds );
-
+        $this->getKrollBondObjects( $deal );
+        $this->getKrollLoanGroupObjects($deal);
 
         return $krollDeal;
     }
@@ -57,4 +56,26 @@ class KrollDealFactory {
         return $krollBonds;
     }
 
+
+    protected function getKrollLoanGroupObjects(Deal $deal): array {
+
+        $objectVars = get_object_vars( $deal );
+
+        /**
+         * @var array $loanGroups An array of LoanGroup objects.
+         */
+        $loanGroups = $objectVars[ 'loanGroups' ];
+
+        $krollLoanGroups       = [];
+        $krollLoanGroupFactory = new KrollLoanGroupFactory();
+        /**
+         * @var Bond LoanGroup
+         */
+        foreach ( $loanGroups as $loanGroup ):
+            $krollLoanGroup    = $krollLoanGroupFactory->loanGroup( $loanGroup );
+            $krollLoanGroups[] = $krollLoanGroup;
+        endforeach;
+
+        return $krollLoanGroups;
+    }
 }

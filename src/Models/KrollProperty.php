@@ -4,12 +4,8 @@ namespace DPRMC\LaravelKrollKCPDataFeed\Models;
 
 class KrollProperty extends AbstractKrollModel {
 
-    public $table                           = 'kroll_kcp_data_feed_property';
-    public $primaryKey                      = self::uuid;
-    public $incrementing                    = FALSE;
-    public $keyType                         = 'string';
+    public $table = 'kroll_properties';
 
-    const uuid                                       = 'uuid';
     const appraised_value                            = 'appraised_value';
     const appraisal_date                             = 'appraisal_date';
     const kbra_concluded_value                       = 'kbra_concluded_value';
@@ -89,8 +85,6 @@ class KrollProperty extends AbstractKrollModel {
     const comp2_net_adjustments                      = 'comp2_net_adjustments';
     const comp3_net_adjustments                      = 'comp3_net_adjustments';
     const comp4_net_adjustments                      = 'comp4_net_adjustments';
-    const created_at                                 = 'created_at';
-    const updated_at                                 = 'updated_at';
 
     protected $casts = [
         self::uuid                                       => 'string',
@@ -142,44 +136,44 @@ class KrollProperty extends AbstractKrollModel {
         // or not enough data to determine the cast for certain.  (i.e. Is the one value available coincidentally an
         // integer? In these cases, float will be used to err on the side of caution )
 
-        self::current_revenue                            => 'string',
-        self::current_ncf                                => 'string',
-        self::current_debt_yield_ncf                     => 'string',
-        self::current_debt_service_amount                => 'string',
-        self::kbra_annualized_revenue                    => 'string',
-        self::kbra_annualized_ncf                        => 'string',
-        self::most_recent_revenue                        => 'string',
-        self::most_recent_expenses                       => 'string',
-        self::most_recent_noi                            => 'string',
-        self::most_recent_ncf                            => 'string',
-        self::trepp_property_id                          => 'string',
-        self::property_id                                => 'string',
-        self::preceding_revenue                          => 'string',
-        self::preceding_expenses                         => 'string',
-        self::preceding_ncf                              => 'string',
-        self::direct_cap_value                           => 'string',
-        self::market_based_income_approach_value         => 'string',
-        self::discounted_cash_flow_value                 => 'string',
-        self::sales_comparison_approach_value            => 'string',
-        self::modeled_market_vacancy                     => 'string',
-        self::year_stabilized                            => 'string',
-        self::years_to_stabilize                         => 'string',
-        self::op_ex_ratio                                => 'string',
-        self::terminal_cap_rate                          => 'string',
-        self::discount_rate                              => 'string',
-        self::tenant_retention                           => 'string',
-        self::comp1_price_per_size                       => 'string',
-        self::comp2_price_per_size                       => 'string',
-        self::comp3_price_per_size                       => 'string',
-        self::comp4_price_per_size                       => 'string',
-        self::comp1_distance                             => 'string',
-        self::comp2_distance                             => 'string',
-        self::comp3_distance                             => 'string',
-        self::comp4_distance                             => 'string',
-        self::comp1_net_adjustments                      => 'string',
-        self::comp2_net_adjustments                      => 'string',
-        self::comp3_net_adjustments                      => 'string',
-        self::comp4_net_adjustments                      => 'string'
+        self::current_revenue                    => 'string',
+        self::current_ncf                        => 'string',
+        self::current_debt_yield_ncf             => 'string',
+        self::current_debt_service_amount        => 'string',
+        self::kbra_annualized_revenue            => 'string',
+        self::kbra_annualized_ncf                => 'string',
+        self::most_recent_revenue                => 'string',
+        self::most_recent_expenses               => 'string',
+        self::most_recent_noi                    => 'string',
+        self::most_recent_ncf                    => 'string',
+        self::trepp_property_id                  => 'string',
+        self::property_id                        => 'string',
+        self::preceding_revenue                  => 'string',
+        self::preceding_expenses                 => 'string',
+        self::preceding_ncf                      => 'string',
+        self::direct_cap_value                   => 'string',
+        self::market_based_income_approach_value => 'string',
+        self::discounted_cash_flow_value         => 'string',
+        self::sales_comparison_approach_value    => 'string',
+        self::modeled_market_vacancy             => 'string',
+        self::year_stabilized                    => 'string',
+        self::years_to_stabilize                 => 'string',
+        self::op_ex_ratio                        => 'string',
+        self::terminal_cap_rate                  => 'string',
+        self::discount_rate                      => 'string',
+        self::tenant_retention                   => 'string',
+        self::comp1_price_per_size               => 'string',
+        self::comp2_price_per_size               => 'string',
+        self::comp3_price_per_size               => 'string',
+        self::comp4_price_per_size               => 'string',
+        self::comp1_distance                     => 'string',
+        self::comp2_distance                     => 'string',
+        self::comp3_distance                     => 'string',
+        self::comp4_distance                     => 'string',
+        self::comp1_net_adjustments              => 'string',
+        self::comp2_net_adjustments              => 'string',
+        self::comp3_net_adjustments              => 'string',
+        self::comp4_net_adjustments              => 'string',
     ];
 }
 

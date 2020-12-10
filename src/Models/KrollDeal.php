@@ -4,14 +4,9 @@ namespace DPRMC\LaravelKrollKCPDataFeed\Models;
 
 class KrollDeal extends AbstractKrollModel {
 
-    public $table        = 'kroll_kcp_data_feed_deals';
-    public $primaryKey   = self::uuid;
-    public $incrementing = FALSE;
+    public $table        = 'kroll_deals';
 
-    public $keyType = 'string';
-    const uuid                                       = 'uuid';
-    const created_at                                 = 'created_at';
-    const updated_at                                 = 'updated_at';
+
     const remit_date                                 = 'remit_date';
     const generated_date                             = 'generated_date';
     const name                                       = 'name'; // Ex: ?/**/
@@ -49,20 +44,8 @@ class KrollDeal extends AbstractKrollModel {
         self::projected_loss_percentage_original_balance => 'string',
     ];
 
-    protected $fillable = [
-        self::uuid,
-        self::remit_date,
-        self::generated_date,
-        self::name,
-        self::lead_analyst,
-        self::lead_analyst_email,
-        self::lead_analyst_phone_number,
-        self::backup_analyst,
-        self::backup_analyst_email,
-        self::backup_analyst_phone_number,
-        self::projected_loss_percentage_current_balance,
-        self::projected_loss_percentage_original_balance,
-    ];
+    // All attributes are mass assignable.
+    protected $guarded = [];
 
 
     public function bonds() {
