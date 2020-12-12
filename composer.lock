@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/DPRMC/KrollKCPDataFeedAPIClient.git",
-                "reference": "4584ab4c38e0292bff7188dd7e7f36f26c2eb57d"
+                "reference": "ce81ea915e284a23b3a1c2e9f876877d03ba8bc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DPRMC/KrollKCPDataFeedAPIClient/zipball/4584ab4c38e0292bff7188dd7e7f36f26c2eb57d",
-                "reference": "4584ab4c38e0292bff7188dd7e7f36f26c2eb57d",
+                "url": "https://api.github.com/repos/DPRMC/KrollKCPDataFeedAPIClient/zipball/ce81ea915e284a23b3a1c2e9f876877d03ba8bc1",
+                "reference": "ce81ea915e284a23b3a1c2e9f876877d03ba8bc1",
                 "shasum": ""
             },
             "require": {
@@ -53,7 +53,7 @@
                 "issues": "https://github.com/DPRMC/KrollKCPDataFeedAPIClient/issues",
                 "source": "https://github.com/DPRMC/KrollKCPDataFeedAPIClient/tree/master"
             },
-            "time": "2020-12-11T19:21:46+00:00"
+            "time": "2020-12-11T21:20:05+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -4364,12 +4364,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "b5f554a649372a16e1d9c058d43adf58b1cc8daa"
+                "reference": "7de4089b40f169cd9e8edc456a0b868711733526"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/b5f554a649372a16e1d9c058d43adf58b1cc8daa",
-                "reference": "b5f554a649372a16e1d9c058d43adf58b1cc8daa",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/7de4089b40f169cd9e8edc456a0b868711733526",
+                "reference": "7de4089b40f169cd9e8edc456a0b868711733526",
                 "shasum": ""
             },
             "require": {
@@ -4432,7 +4432,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-12-08T18:02:35+00:00"
+            "time": "2020-12-12T05:37:08+00:00"
         },
         {
             "name": "symfony/config",
