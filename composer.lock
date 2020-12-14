@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/DPRMC/KrollKCPDataFeedAPIClient.git",
-                "reference": "37d5f2581a14ce89886346434a5b0f6a6630c79d"
+                "reference": "6b1b3ac02c262db5d890a75ee13e297cf351a419"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DPRMC/KrollKCPDataFeedAPIClient/zipball/37d5f2581a14ce89886346434a5b0f6a6630c79d",
-                "reference": "37d5f2581a14ce89886346434a5b0f6a6630c79d",
+                "url": "https://api.github.com/repos/DPRMC/KrollKCPDataFeedAPIClient/zipball/6b1b3ac02c262db5d890a75ee13e297cf351a419",
+                "reference": "6b1b3ac02c262db5d890a75ee13e297cf351a419",
                 "shasum": ""
             },
             "require": {
@@ -53,7 +53,7 @@
                 "issues": "https://github.com/DPRMC/KrollKCPDataFeedAPIClient/issues",
                 "source": "https://github.com/DPRMC/KrollKCPDataFeedAPIClient/tree/master"
             },
-            "time": "2020-12-12T15:23:28+00:00"
+            "time": "2020-12-14T03:45:29+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2086,12 +2086,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/testbench-core.git",
-                "reference": "a68f22b088684b639a7608b3ea149c6df23e547d"
+                "reference": "489d18403a4b62d2c51e6ac4ad36f4e0dca4ca8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/a68f22b088684b639a7608b3ea149c6df23e547d",
-                "reference": "a68f22b088684b639a7608b3ea149c6df23e547d",
+                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/489d18403a4b62d2c51e6ac4ad36f4e0dca4ca8d",
+                "reference": "489d18403a4b62d2c51e6ac4ad36f4e0dca4ca8d",
                 "shasum": ""
             },
             "require": {
@@ -2157,7 +2157,7 @@
                     "type": "liberapay"
                 }
             ],
-            "time": "2020-12-10T08:33:12+00:00"
+            "time": "2020-12-14T01:01:22+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -2272,16 +2272,16 @@
         },
         {
             "name": "phar-io/version",
-            "version": "3.0.3",
+            "version": "3.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phar-io/version.git",
-                "reference": "726c026815142e4f8677b7cb7f2249c9ffb7ecae"
+                "reference": "e4782611070e50613683d2b9a57730e9a3ba5451"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phar-io/version/zipball/726c026815142e4f8677b7cb7f2249c9ffb7ecae",
-                "reference": "726c026815142e4f8677b7cb7f2249c9ffb7ecae",
+                "url": "https://api.github.com/repos/phar-io/version/zipball/e4782611070e50613683d2b9a57730e9a3ba5451",
+                "reference": "e4782611070e50613683d2b9a57730e9a3ba5451",
                 "shasum": ""
             },
             "require": {
@@ -2317,9 +2317,9 @@
             "description": "Library for handling version information and constraints",
             "support": {
                 "issues": "https://github.com/phar-io/version/issues",
-                "source": "https://github.com/phar-io/version/tree/3.0.3"
+                "source": "https://github.com/phar-io/version/tree/3.0.4"
             },
-            "time": "2020-11-30T09:21:21+00:00"
+            "time": "2020-12-13T23:18:30+00:00"
         },
         {
             "name": "php-coveralls/php-coveralls",
@@ -3437,16 +3437,16 @@
         },
         {
             "name": "sebastian/code-unit",
-            "version": "dev-master",
+            "version": "1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/code-unit.git",
-                "reference": "123d87ba8c96689bae9b9bc77e62c88421e2ee77"
+                "reference": "1fc9f64c0927627ef78ba436c9b17d967e68e120"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/code-unit/zipball/123d87ba8c96689bae9b9bc77e62c88421e2ee77",
-                "reference": "123d87ba8c96689bae9b9bc77e62c88421e2ee77",
+                "url": "https://api.github.com/repos/sebastianbergmann/code-unit/zipball/1fc9f64c0927627ef78ba436c9b17d967e68e120",
+                "reference": "1fc9f64c0927627ef78ba436c9b17d967e68e120",
                 "shasum": ""
             },
             "require": {
@@ -3455,7 +3455,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^9.3"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -3482,7 +3481,7 @@
             "homepage": "https://github.com/sebastianbergmann/code-unit",
             "support": {
                 "issues": "https://github.com/sebastianbergmann/code-unit/issues",
-                "source": "https://github.com/sebastianbergmann/code-unit/tree/master"
+                "source": "https://github.com/sebastianbergmann/code-unit/tree/1.0.8"
             },
             "funding": [
                 {
@@ -3490,7 +3489,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-12-11T06:05:20+00:00"
+            "time": "2020-10-26T13:08:54+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
