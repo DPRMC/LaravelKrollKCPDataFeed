@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/DPRMC/KrollKCPDataFeedAPIClient.git",
-                "reference": "6b1b3ac02c262db5d890a75ee13e297cf351a419"
+                "reference": "86b260d521c2181907d5760d2f1bd20651ab8e6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DPRMC/KrollKCPDataFeedAPIClient/zipball/6b1b3ac02c262db5d890a75ee13e297cf351a419",
-                "reference": "6b1b3ac02c262db5d890a75ee13e297cf351a419",
+                "url": "https://api.github.com/repos/DPRMC/KrollKCPDataFeedAPIClient/zipball/86b260d521c2181907d5760d2f1bd20651ab8e6c",
+                "reference": "86b260d521c2181907d5760d2f1bd20651ab8e6c",
                 "shasum": ""
             },
             "require": {
@@ -53,7 +53,7 @@
                 "issues": "https://github.com/DPRMC/KrollKCPDataFeedAPIClient/issues",
                 "source": "https://github.com/DPRMC/KrollKCPDataFeedAPIClient/tree/master"
             },
-            "time": "2020-12-14T03:45:29+00:00"
+            "time": "2020-12-15T19:00:19+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -1266,12 +1266,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "4d5159f161fe271c322abdb21d9c3fff59678117"
+                "reference": "94171f04f1aaa79bdcf1f0f9e076f276cd46608d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/4d5159f161fe271c322abdb21d9c3fff59678117",
-                "reference": "4d5159f161fe271c322abdb21d9c3fff59678117",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/94171f04f1aaa79bdcf1f0f9e076f276cd46608d",
+                "reference": "94171f04f1aaa79bdcf1f0f9e076f276cd46608d",
                 "shasum": ""
             },
             "require": {
@@ -1411,7 +1411,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2020-12-08T18:57:38+00:00"
+            "time": "2020-12-14T23:33:42+00:00"
         },
         {
             "name": "league/commonmark",
@@ -1744,12 +1744,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "9fc7a8a810bbe40de9757ec748ba2e60b99805a5"
+                "reference": "1cb1cde8e8dd0f70cc0fe51354a59acad9302084"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/9fc7a8a810bbe40de9757ec748ba2e60b99805a5",
-                "reference": "9fc7a8a810bbe40de9757ec748ba2e60b99805a5",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1cb1cde8e8dd0f70cc0fe51354a59acad9302084",
+                "reference": "1cb1cde8e8dd0f70cc0fe51354a59acad9302084",
                 "shasum": ""
             },
             "require": {
@@ -1772,7 +1772,7 @@
                 "phpunit/phpunit": "^8.5",
                 "predis/predis": "^1.1",
                 "rollbar/rollbar": "^1.3",
-                "ruflin/elastica": ">=0.90 <3.0",
+                "ruflin/elastica": ">=0.90 <7.0.1",
                 "swiftmailer/swiftmailer": "^5.3|^6.0"
             },
             "suggest": {
@@ -1821,7 +1821,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/main"
+                "source": "https://github.com/Seldaek/monolog/tree/2.2.0"
             },
             "funding": [
                 {
@@ -1833,7 +1833,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-12-11T12:31:25+00:00"
+            "time": "2020-12-14T13:15:25+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2086,12 +2086,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/testbench-core.git",
-                "reference": "489d18403a4b62d2c51e6ac4ad36f4e0dca4ca8d"
+                "reference": "f8fa8407b1f10884f974e3d334f66ccc9769dbc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/489d18403a4b62d2c51e6ac4ad36f4e0dca4ca8d",
-                "reference": "489d18403a4b62d2c51e6ac4ad36f4e0dca4ca8d",
+                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/f8fa8407b1f10884f974e3d334f66ccc9769dbc2",
+                "reference": "f8fa8407b1f10884f974e3d334f66ccc9769dbc2",
                 "shasum": ""
             },
             "require": {
@@ -2101,12 +2101,12 @@
             "require-dev": {
                 "laravel/framework": "^6.18.0",
                 "laravel/laravel": "6.x-dev",
-                "mockery/mockery": "~1.2.3 || ^1.3.1",
+                "mockery/mockery": "^1.3.2",
                 "phpunit/phpunit": "^8.3 || ^9.0"
             },
             "suggest": {
                 "laravel/framework": "Required for testing (^6.18).",
-                "mockery/mockery": "Allow using Mockery for testing (^1.2.3).",
+                "mockery/mockery": "Allow using Mockery for testing (^1.3.2).",
                 "orchestra/testbench-browser-kit": "Allow using legacy Laravel BrowserKit for testing (^4.0).",
                 "orchestra/testbench-dusk": "Allow using Laravel Dusk for testing (^4.0).",
                 "phpunit/phpunit": "Allow using PHPUnit for testing (^8.3)."
@@ -2157,7 +2157,7 @@
                     "type": "liberapay"
                 }
             ],
-            "time": "2020-12-14T01:01:22+00:00"
+            "time": "2020-12-15T00:14:05+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -3384,12 +3384,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/cli-parser.git",
-                "reference": "e7a822949a7a7c0686e8bb668759a53da7d04da2"
+                "reference": "922f683e943fef277c005e27b3b2ea97299d997e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/cli-parser/zipball/e7a822949a7a7c0686e8bb668759a53da7d04da2",
-                "reference": "e7a822949a7a7c0686e8bb668759a53da7d04da2",
+                "url": "https://api.github.com/repos/sebastianbergmann/cli-parser/zipball/922f683e943fef277c005e27b3b2ea97299d997e",
+                "reference": "922f683e943fef277c005e27b3b2ea97299d997e",
                 "shasum": ""
             },
             "require": {
@@ -3433,7 +3433,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-12-09T08:39:33+00:00"
+            "time": "2020-12-14T10:23:09+00:00"
         },
         {
             "name": "sebastian/code-unit",
