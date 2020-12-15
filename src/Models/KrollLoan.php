@@ -6,6 +6,9 @@ class KrollLoan extends AbstractKrollModel {
 
     public $table = 'kroll_loans';
 
+    const deal_uuid       = 'deal_uuid';
+    const loan_group_uuid = 'loan_group_uuid';
+
     const appraised_value                            = 'appraised_value';
     const appraisal_date                             = 'appraisal_date';
     const kbra_concluded_value                       = 'kbra_concluded_value';
@@ -69,7 +72,10 @@ class KrollLoan extends AbstractKrollModel {
 
 
     protected $casts = [
-        self::uuid                                       => 'string',
+        self::uuid            => 'string',
+        self::deal_uuid       => 'string',
+        self::loan_group_uuid => 'string',
+
         self::appraised_value                            => 'float',
         self::appraisal_date                             => 'date',
         self::kbra_concluded_value                       => 'float',
@@ -116,27 +122,27 @@ class KrollLoan extends AbstractKrollModel {
         // or not enough data to determine the cast for certain.  (i.e. Is the one value available coincidentally an
         // integer? In these cases, float will be used to err on the side of caution )
 
-        self::current_revenue                            => 'string',
-        self::current_ncf                                => 'string',
-        self::current_debt_service_amount                => 'string',
-        self::kbra_annualized_revenue                    => 'string',
-        self::kbra_annualized_ncf                        => 'string',
-        self::most_recent_revenue                        => 'string',
-        self::most_recent_expenses                       => 'string',
-        self::most_recent_noi                            => 'string',
-        self::most_recent_ncf                            => 'string',
-        self::preceding_revenue                          => 'string',
-        self::preceding_expenses                         => 'string',
-        self::preceding_ncf                              => 'string',
-        self::klgd                                       => 'string',
-        self::concluded_kcp_modeled_loss                 => 'string',
-        self::conservative_kcp_modeled_loss              => 'string',
-        self::optimistic_kcp_modeled_loss                => 'string',
-        self::average_rent_growth                        => 'string',
-        self::average_expense_growth                     => 'string',
-        self::servicer_status                            => 'string',
-        self::servicer_commentary_period                 => 'string',
-        self::servicer_commentary                        => 'string'
+        self::current_revenue               => 'string',
+        self::current_ncf                   => 'string',
+        self::current_debt_service_amount   => 'string',
+        self::kbra_annualized_revenue       => 'string',
+        self::kbra_annualized_ncf           => 'string',
+        self::most_recent_revenue           => 'string',
+        self::most_recent_expenses          => 'string',
+        self::most_recent_noi               => 'string',
+        self::most_recent_ncf               => 'string',
+        self::preceding_revenue             => 'string',
+        self::preceding_expenses            => 'string',
+        self::preceding_ncf                 => 'string',
+        self::klgd                          => 'string',
+        self::concluded_kcp_modeled_loss    => 'string',
+        self::conservative_kcp_modeled_loss => 'string',
+        self::optimistic_kcp_modeled_loss   => 'string',
+        self::average_rent_growth           => 'string',
+        self::average_expense_growth        => 'string',
+        self::servicer_status               => 'string',
+        self::servicer_commentary_period    => 'string',
+        self::servicer_commentary           => 'string',
     ];
 
 }

@@ -6,6 +6,10 @@ class KrollProperty extends AbstractKrollModel {
 
     public $table = 'kroll_properties';
 
+    const loan_uuid       = 'loan_uuid';
+    const loan_group_uuid = 'loan_group_uuid';
+    const deal_uuid       = 'deal_uuid';
+
     const appraised_value                            = 'appraised_value';
     const appraisal_date                             = 'appraisal_date';
     const kbra_concluded_value                       = 'kbra_concluded_value';

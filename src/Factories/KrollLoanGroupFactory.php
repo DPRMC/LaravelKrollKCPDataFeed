@@ -2,6 +2,7 @@
 
 namespace DPRMC\LaravelKrollKCPDataFeed\Factories;
 
+use DPRMC\KrollKCPDataFeedAPIClient\Deal;
 use DPRMC\KrollKCPDataFeedAPIClient\LoanGroup;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollLoanGroup;
 
@@ -10,14 +11,16 @@ class KrollLoanGroupFactory {
     public function __construct() {
     }
 
-    public function loanGroup( LoanGroup $loanGroup ): KrollLoanGroup {
+    public function loanGroup( LoanGroup $loanGroup, Deal $deal): KrollLoanGroup {
         $objectVars = get_object_vars( $loanGroup );
         $loans      = $objectVars[ 'loans' ];
         unset( $objectVars[ 'loans' ] );
         $krollLoanFactory = new KrollLoanFactory();
 
+        $loanGroupUUID = $loanGroup->uuid;
+
         foreach ( $loans as $loan ):
-            $krollLoanFactory->loan( $loan );
+            $krollLoanFactory->loan( $loan, $deal, $loanGroupUUID);
         endforeach;
 
         $objectVars[ 'pari_passu_details' ] = json_encode( $objectVars[ 'pari_passu_details' ] );
