@@ -26,8 +26,10 @@ class KrollLoanFactory {
         $objectVars[ KrollLoan::deal_uuid ]       = $deal->uuid;
         $objectVars[ KrollLoan::loan_group_uuid ] = $loanGroupUUID;
 
-        return KrollLoan::firstOrCreate(
+        $krollLoan = KrollLoan::firstOrCreate(
             [ KrollLoan::uuid => $objectVars[ 'uuid' ] ],
             $objectVars );
+        $krollLoan->save();
+        return $krollLoan;
     }
 }

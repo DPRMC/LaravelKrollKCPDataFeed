@@ -12,11 +12,12 @@ class KrollBondFactory {
     }
 
     public function bond( Bond $bond, Deal $deal ): KrollBond {
-        $objectVars = get_object_vars( $bond );
-
+        $objectVars                         = get_object_vars( $bond );
         $objectVars[ KrollBond::deal_uuid ] = $deal->uuid;
 
-        return KrollBond::firstOrCreate( [ KrollBond::uuid => $objectVars[ 'uuid' ] ], $objectVars );
+        $krollBond = KrollBond::firstOrCreate( [ KrollBond::uuid => $objectVars[ 'uuid' ] ], $objectVars );
+        $krollBond->save();
+        return $krollBond;
     }
 
 

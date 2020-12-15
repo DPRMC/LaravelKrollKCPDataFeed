@@ -22,8 +22,10 @@ class KrollPropertyFactory {
         $objectVars[ KrollProperty::loan_group_uuid ] = $loanGroupUUID;
         $objectVars[ KrollProperty::deal_uuid ]       = $deal->uuid;
 
-        return KrollProperty::firstOrCreate(
+        $krollProperty = KrollProperty::firstOrCreate(
             [ KrollProperty::uuid => $objectVars[ 'uuid' ] ],
             $objectVars );
+        $krollProperty->save();
+        return $krollProperty;
     }
 }
