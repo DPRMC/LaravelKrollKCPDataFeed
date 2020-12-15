@@ -49,7 +49,7 @@ class KrollDealFactory {
          * @var Bond $bond
          */
         foreach ( $bonds as $bond ):
-            $krollBond    = $krollBondFactory->bond( $bond );
+            $krollBond    = $krollBondFactory->bond( $bond, $deal );
             $krollBonds[] = $krollBond;
         endforeach;
 
