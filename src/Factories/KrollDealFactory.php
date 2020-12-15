@@ -31,7 +31,7 @@ class KrollDealFactory {
         $krollDeal->save();
 
         $this->getKrollBondObjects( $deal );
-        $this->getKrollLoanGroupObjects($deal);
+        $this->getKrollLoanGroupObjects( $deal );
 
         return $krollDeal;
     }
@@ -57,7 +57,7 @@ class KrollDealFactory {
     }
 
 
-    protected function getKrollLoanGroupObjects(Deal $deal): array {
+    protected function getKrollLoanGroupObjects( Deal $deal ): array {
 
         $objectVars = get_object_vars( $deal );
 
@@ -72,7 +72,7 @@ class KrollDealFactory {
          * @var Bond LoanGroup
          */
         foreach ( $loanGroups as $loanGroup ):
-            $krollLoanGroup    = $krollLoanGroupFactory->loanGroup( $loanGroup );
+            $krollLoanGroup    = $krollLoanGroupFactory->loanGroup( $loanGroup, $deal );
             $krollLoanGroups[] = $krollLoanGroup;
         endforeach;
 
