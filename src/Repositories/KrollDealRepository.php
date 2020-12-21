@@ -11,7 +11,9 @@ class KrollDealRepository {
 
     public function getRecent(int $daysAgo=7){
         $earliestDate = Carbon::now(Helper::CARBON_TIMEZONE)->subDays($daysAgo);
-        return KrollDeal::where(KrollDeal::generated_date, '<', $earliestDate)->get();
+        return KrollDeal::where(KrollDeal::generated_date, '<', $earliestDate)
+                        ->orderBy(KrollDeal::generated_date)
+                        ->get();
     }
 
 }
