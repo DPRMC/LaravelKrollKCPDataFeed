@@ -33,9 +33,13 @@ class KrollLoanGroupFactory {
         $objectVars[ 'pari_kbra_master_deal_name' ] = empty( $objectVars[ 'pari_kbra_master_deal' ][ 'name' ] ) ? '' : $objectVars[ 'pari_kbra_master_deal' ][ 'name' ];
         unset( $objectVars[ 'pari_kbra_master_deal' ] );
 
+        $objectVars['deal_uuid'] = $deal->uuid;
+
         $krollLoanGroup = KrollLoanGroup::firstOrCreate(
             [ KrollLoanGroup::uuid => $objectVars[ 'uuid' ] ], $objectVars );
         $krollLoanGroup->save();
+
+        return $krollLoanGroup;
     }
 
 
