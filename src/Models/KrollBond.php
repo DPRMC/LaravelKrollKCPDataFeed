@@ -4,7 +4,7 @@ namespace DPRMC\LaravelKrollKCPDataFeed\Models;
 
 class KrollBond extends AbstractKrollModel {
 
-    public $table        = 'kroll_bonds';
+    public $table = 'kroll_bonds';
 
     const deal_uuid                             = 'deal_uuid';
     const name                                  = 'name';
@@ -73,13 +73,18 @@ class KrollBond extends AbstractKrollModel {
     ];
 
 
-
-
     // Relations
+    const deal = 'deal';
+
     public function deal() {
         return $this->belongsTo( KrollDeal::class,
                                  KrollDeal::uuid,
                                  KrollBond::uuid );
+    }
+
+
+    public function otherBonds() {
+        $this->hasManyThrough( KrollBond::class, KrollDeal::class );
     }
 
 
