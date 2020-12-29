@@ -74,18 +74,23 @@ class KrollBond extends AbstractKrollModel {
 
 
     // Relations
-    const deal = 'deal';
+    const deal       = 'deal';
+    const otherBonds = 'otherBonds';
 
+    /**
+     * Relationship to the Deal that "owns" this Bond.
+     */
     public function deal() {
         return $this->belongsTo( KrollDeal::class,
-                                 KrollDeal::uuid,
-                                 KrollBond::uuid );
+                                 KrollBond::deal_uuid,
+                                 KrollDeal::uuid );
     }
 
 
+    /**
+     * Relationship to the other Bonds that belong to the parent Deal.
+     */
     public function otherBonds() {
         $this->hasManyThrough( KrollBond::class, KrollDeal::class );
     }
-
-
 }
