@@ -1,34 +1,33 @@
 {
-    "name": "dprmc/laravel-kroll-kcp-data-feed",
-    "description": "Laravel models for the Kroll KCP Data Feed.",
-    "type": "library",
-    "require-dev": {
-        "phpunit/phpunit": "^9.4",
-        "php-coveralls/php-coveralls": "^2.4",
-        "laravel/framework": "^6.18.25",
-        "orchestra/testbench": "4.11.0"
-    },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "michaeldrennen",
-            "email": "michaeldrennen74@gmail.com"
-        }
-    ],
-    "require": {
-        "ext-json": "*",
-        "dprmc/kroll-kcp-data-feed-api-client": "^0.0"
-    },
-    "minimum-stability": "dev",
-    "autoload": {
-        "psr-4": {
-            "DPRMC\\LaravelKrollKCPDataFeed\\": "src",
-            "DPRMC\\Tests\\": "tests/"
-        }
-    },
-    "autoload-dev": {
-        "psr-0": {
-
-        }
+  "name": "dprmc/laravel-kroll-kcp-data-feed",
+  "description": "Laravel models for the Kroll KCP Data Feed.",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "michaeldrennen",
+      "email": "michaeldrennen74@gmail.com"
     }
+  ],
+  "require-dev": {
+    "phpunit/phpunit": "^9.4",
+    "php-coveralls/php-coveralls": "^2.4",
+    "laravel/framework": "^6.18.25",
+    "orchestra/testbench": "4.11.0"
+  },
+  "require": {
+    "ext-json": "*",
+    "dprmc/kroll-kcp-data-feed-api-client": "^0.0"
+  },
+  "minimum-stability": "stable",
+  "autoload": {
+    "psr-4": {
+      "DPRMC\\LaravelKrollKCPDataFeed\\": "src",
+      "DPRMC\\Tests\\": "tests/"
+    }
+  },
+  "autoload-dev": {
+    "psr-0": {
+    }
+  }
 }
