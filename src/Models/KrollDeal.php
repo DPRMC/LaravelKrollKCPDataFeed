@@ -4,7 +4,7 @@ namespace DPRMC\LaravelKrollKCPDataFeed\Models;
 
 class KrollDeal extends AbstractKrollModel {
 
-    public $table        = 'kroll_deals';
+    public $table = 'kroll_deals';
 
 
     const remit_date                                 = 'remit_date';
@@ -25,6 +25,8 @@ class KrollDeal extends AbstractKrollModel {
     const bonds                       = 'bonds';
     const loanGroups                  = 'loanGroups';
     const paidOffLiquidatedLoanGroups = 'paidOffLiquidatedLoanGroups';
+    const loans                       = 'loans';
+    const properties                  = 'properties';
 
 
     protected $casts = [
@@ -51,6 +53,18 @@ class KrollDeal extends AbstractKrollModel {
     public function bonds() {
         return $this->hasMany( KrollBond::class,
                                KrollBond::deal_uuid,
+                               KrollDeal::uuid );
+    }
+
+    public function loans() {
+        return $this->hasMany( KrollLoan::class,
+                               KrollLoan::deal_uuid,
+                               KrollDeal::uuid );
+    }
+
+    public function properties() {
+        return $this->hasMany( KrollProperty::class,
+                               KrollProperty::deal_uuid,
                                KrollDeal::uuid );
     }
 
