@@ -91,6 +91,9 @@ class KrollBond extends AbstractKrollModel {
      * Relationship to the other Bonds that belong to the parent Deal.
      */
     public function otherBonds() {
-        return $this->hasManyThrough( KrollBond::class, KrollDeal::class );
+        return $this->hasManyThrough( KrollBond::class,
+                                      KrollDeal::class,
+                                      KrollDeal::uuid,
+                                      KrollBond::deal_uuid );
     }
 }
