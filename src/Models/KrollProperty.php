@@ -2,9 +2,38 @@
 
 namespace DPRMC\LaravelKrollKCPDataFeed\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 class KrollProperty extends AbstractKrollModel {
 
     public $table = 'kroll_properties';
+
+
+    // Relations
+    const loan      = 'loan';
+    const loanGroup = 'loanGroup';
+    const deal      = 'deal';
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function loan(): BelongsTo {
+        return $this->belongsTo( KrollLoan::class );
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function loanGroup(): BelongsTo {
+        return $this->belongsTo( KrollLoanGroup::class );
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function deal(): BelongsTo {
+        return $this->belongsTo( KrollDeal::class );
+    }
 
     const loan_uuid       = 'loan_uuid';
     const loan_group_uuid = 'loan_group_uuid';

@@ -3,6 +3,8 @@
 namespace DPRMC\LaravelKrollKCPDataFeed\Models;
 
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 class KrollLoanGroup extends AbstractKrollModel {
 
     public $table = 'kroll_loan_groups';
@@ -80,8 +82,7 @@ class KrollLoanGroup extends AbstractKrollModel {
     const created_at                                 = 'created_at';
     const updated_at                                 = 'updated_at';
 
-    // Relations
-    const deal = 'deal';
+
 
     protected $casts = [
         self::deal_uuid                                  => 'string',
@@ -164,7 +165,12 @@ class KrollLoanGroup extends AbstractKrollModel {
 
 
     // Relations
-    public function deal() {
+    const deal = 'deal';
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function deal(): BelongsTo {
         return $this->belongsTo( KrollDeal::class,
                                  self::deal_uuid,
                                  KrollDeal::uuid );

@@ -2,6 +2,8 @@
 
 namespace DPRMC\LaravelKrollKCPDataFeed\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 class KrollBond extends AbstractKrollModel {
 
     public $table = 'kroll_bonds';
@@ -79,8 +81,9 @@ class KrollBond extends AbstractKrollModel {
 
     /**
      * Relationship to the Deal that "owns" this Bond.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function deal() {
+    public function deal(): BelongsTo {
         return $this->belongsTo( KrollDeal::class,
                                  KrollBond::deal_uuid,
                                  KrollDeal::uuid );
@@ -89,8 +92,9 @@ class KrollBond extends AbstractKrollModel {
 
     /**
      * Relationship to the other Bonds that belong to the parent Deal.
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
-    public function otherBonds() {
+    public function otherBonds(): BelongsTo {
         return $this->hasManyThrough( KrollBond::class,
                                       KrollDeal::class,
                                       KrollDeal::uuid,
