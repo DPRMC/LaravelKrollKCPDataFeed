@@ -13,7 +13,20 @@ class KrollPropertyFactory {
     public function __construct() {
     }
 
-    public function property( Property $property, Loan $loan, string $loanGroupUUID, Deal $deal ): KrollProperty {
+
+    /**
+     * @param Property $property
+     * @param Loan $loan
+     * @param string $loanGroupUUID
+     * @param Deal $deal
+     * @param string $generatedDate
+     * @return KrollProperty
+     */
+    public function property( Property $property,
+                              Loan $loan,
+                              string $loanGroupUUID,
+                              Deal $deal,
+                              string $generatedDate ): KrollProperty {
         $objectVars = get_object_vars( $property );
 
         $objectVars[ 'pari_passu_details' ] = json_encode( $objectVars[ 'pari_passu_details' ] );
@@ -21,10 +34,13 @@ class KrollPropertyFactory {
         $objectVars[ KrollProperty::loan_uuid ]       = $loan->uuid;
         $objectVars[ KrollProperty::loan_group_uuid ] = $loanGroupUUID;
         $objectVars[ KrollProperty::deal_uuid ]       = $deal->uuid;
+        $objectVars[ KrollProperty::generated_date ]  = $generatedDate;
 
-        $krollProperty = KrollProperty::firstOrCreate(
-            [ KrollProperty::uuid => $objectVars[ 'uuid' ] ],
-            $objectVars );
+        $krollProperty = KrollProperty::firstOrCreate( [
+                                                           KrollProperty::uuid           => $objectVars[ 'uuid' ],
+                                                           KrollProperty::generated_date => $generatedDate,
+                                                       ],
+                                                       $objectVars );
         $krollProperty->save();
         return $krollProperty;
     }

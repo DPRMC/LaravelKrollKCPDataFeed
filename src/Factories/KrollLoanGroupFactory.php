@@ -11,7 +11,7 @@ class KrollLoanGroupFactory {
     public function __construct() {
     }
 
-    public function loanGroup( LoanGroup $loanGroup, Deal $deal): KrollLoanGroup {
+    public function loanGroup( LoanGroup $loanGroup, Deal $deal, string $generatedDate ): KrollLoanGroup {
         $objectVars = get_object_vars( $loanGroup );
         $loans      = $objectVars[ 'loans' ];
         unset( $objectVars[ 'loans' ] );
@@ -20,7 +20,7 @@ class KrollLoanGroupFactory {
         $loanGroupUUID = $loanGroup->uuid;
 
         foreach ( $loans as $loan ):
-            $krollLoanFactory->loan( $loan, $deal, $loanGroupUUID);
+            $krollLoanFactory->loan( $loan, $deal, $loanGroupUUID, $generatedDate );
         endforeach;
 
         $objectVars[ 'pari_passu_details' ] = json_encode( $objectVars[ 'pari_passu_details' ] );
@@ -33,10 +33,13 @@ class KrollLoanGroupFactory {
         $objectVars[ 'pari_kbra_master_deal_name' ] = empty( $objectVars[ 'pari_kbra_master_deal' ][ 'name' ] ) ? '' : $objectVars[ 'pari_kbra_master_deal' ][ 'name' ];
         unset( $objectVars[ 'pari_kbra_master_deal' ] );
 
-        $objectVars['deal_uuid'] = $deal->uuid;
+        $objectVars[ 'deal_uuid' ]                    = $deal->uuid;
+        $objectVars[ KrollLoanGroup::generated_date ] = $generatedDate;
 
-        $krollLoanGroup = KrollLoanGroup::firstOrCreate(
-            [ KrollLoanGroup::uuid => $objectVars[ 'uuid' ] ], $objectVars );
+        $krollLoanGroup = KrollLoanGroup::firstOrCreate( [
+                                                             KrollLoanGroup::uuid           => $objectVars[ KrollLoanGroup::uuid ],
+                                                             KrollLoanGroup::generated_date => $objectVars[ KrollLoanGroup::generated_date ],
+                                                         ], $objectVars );
         $krollLoanGroup->save();
 
         return $krollLoanGroup;

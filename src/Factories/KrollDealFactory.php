@@ -26,17 +26,25 @@ class KrollDealFactory {
         $objectVars[ KrollDeal::generated_date ] = $objectVars[ 'generatedDate' ];
         unset( $objectVars[ 'generatedDate' ] );
 
-
-        $krollDeal = KrollDeal::firstOrCreate( [ KrollDeal::uuid => $objectVars[ 'uuid' ] ], $objectVars );
+        $krollDeal = KrollDeal::firstOrCreate( [
+                                                   KrollDeal::uuid           => $objectVars[ 'uuid' ],
+                                                   KrollDeal::generated_date => $objectVars[ KrollDeal::generated_date ],
+                                               ], $objectVars );
         $krollDeal->save();
 
-        $this->getKrollBondObjects( $deal );
-        $this->getKrollLoanGroupObjects( $deal );
+        $this->getKrollBondObjects( $deal, $objectVars[ KrollDeal::generated_date ] );
+        $this->getKrollLoanGroupObjects( $deal, $objectVars[ KrollDeal::generated_date ] );
 
         return $krollDeal;
     }
 
-    protected function getKrollBondObjects( Deal $deal ): array {
+
+    /**
+     * @param Deal $deal
+     * @param string $generatedDate
+     * @return array
+     */
+    protected function getKrollBondObjects( Deal $deal, string $generatedDate ): array {
         $objectVars = get_object_vars( $deal );
         /**
          * @var array $bonds An array of Bond objects.
@@ -49,7 +57,7 @@ class KrollDealFactory {
          * @var Bond $bond
          */
         foreach ( $bonds as $bond ):
-            $krollBond    = $krollBondFactory->bond( $bond, $deal );
+            $krollBond    = $krollBondFactory->bond( $bond, $deal, $generatedDate );
             $krollBonds[] = $krollBond;
         endforeach;
 
@@ -57,7 +65,7 @@ class KrollDealFactory {
     }
 
 
-    protected function getKrollLoanGroupObjects( Deal $deal ): array {
+    protected function getKrollLoanGroupObjects( Deal $deal, string $generatedDate ): array {
 
         $objectVars = get_object_vars( $deal );
 
@@ -72,7 +80,7 @@ class KrollDealFactory {
          * @var Bond LoanGroup
          */
         foreach ( $loanGroups as $loanGroup ):
-            $krollLoanGroup    = $krollLoanGroupFactory->loanGroup( $loanGroup, $deal );
+            $krollLoanGroup    = $krollLoanGroupFactory->loanGroup( $loanGroup, $deal, $generatedDate );
             $krollLoanGroups[] = $krollLoanGroup;
         endforeach;
 

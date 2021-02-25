@@ -7,7 +7,9 @@ use Illuminate\Support\Str;
 
 abstract class AbstractKrollModel extends Model {
 
-    const uuid       = 'uuid';
+    const uuid           = 'uuid';
+    const generated_date = 'generated_date';
+
     const created_at = 'created_at';
     const updated_at = 'updated_at';
 

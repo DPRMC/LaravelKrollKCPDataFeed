@@ -12,7 +12,15 @@ class KrollLoanFactory {
     public function __construct() {
     }
 
-    public function loan( Loan $loan, Deal $deal, string $loanGroupUUID ): KrollLoan {
+
+    /**
+     * @param Loan $loan
+     * @param Deal $deal
+     * @param string $loanGroupUUID
+     * @param string $generatedDate
+     * @return KrollLoan
+     */
+    public function loan( Loan $loan, Deal $deal, string $loanGroupUUID, string $generatedDate ): KrollLoan {
         $objectVars = get_object_vars( $loan );
 
         $properties = $objectVars[ 'properties' ];
@@ -20,15 +28,18 @@ class KrollLoanFactory {
         $krollPropertyFactory = new KrollPropertyFactory();
 
         foreach ( $properties as $property ):
-            $krollPropertyFactory->property( $property, $loan, $loanGroupUUID, $deal );
+            $krollPropertyFactory->property( $property, $loan, $loanGroupUUID, $deal, $generatedDate );
         endforeach;
 
         $objectVars[ KrollLoan::deal_uuid ]       = $deal->uuid;
         $objectVars[ KrollLoan::loan_group_uuid ] = $loanGroupUUID;
+        $objectVars[ KrollLoan::generated_date ]  = $generatedDate;
 
-        $krollLoan = KrollLoan::firstOrCreate(
-            [ KrollLoan::uuid => $objectVars[ 'uuid' ] ],
-            $objectVars );
+        $krollLoan = KrollLoan::firstOrCreate( [
+                                                   KrollLoan::uuid           => $objectVars[ 'uuid' ],
+                                                   KrollLoan::generated_date => $generatedDate,
+                                               ],
+                                               $objectVars );
         $krollLoan->save();
         return $krollLoan;
     }
