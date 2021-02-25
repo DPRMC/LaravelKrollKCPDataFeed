@@ -2,6 +2,7 @@
 
 namespace DPRMC\LaravelKrollKCPDataFeed\Factories;
 
+use Carbon\Carbon;
 use DPRMC\KrollKCPDataFeedAPIClient\Deal;
 use DPRMC\KrollKCPDataFeedAPIClient\Loan;
 use DPRMC\KrollKCPDataFeedAPIClient\LoanGroup;
@@ -26,7 +27,7 @@ class KrollPropertyFactory {
                               Loan $loan,
                               string $loanGroupUUID,
                               Deal $deal,
-                              string $generatedDate ): KrollProperty {
+                              Carbon $generatedDate ): KrollProperty {
         $objectVars = get_object_vars( $property );
 
         $objectVars[ 'pari_passu_details' ] = json_encode( $objectVars[ 'pari_passu_details' ] );

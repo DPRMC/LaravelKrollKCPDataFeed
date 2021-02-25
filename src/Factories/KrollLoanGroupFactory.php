@@ -2,6 +2,7 @@
 
 namespace DPRMC\LaravelKrollKCPDataFeed\Factories;
 
+use Carbon\Carbon;
 use DPRMC\KrollKCPDataFeedAPIClient\Deal;
 use DPRMC\KrollKCPDataFeedAPIClient\LoanGroup;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollLoanGroup;
@@ -11,7 +12,14 @@ class KrollLoanGroupFactory {
     public function __construct() {
     }
 
-    public function loanGroup( LoanGroup $loanGroup, Deal $deal, string $generatedDate ): KrollLoanGroup {
+
+    /**
+     * @param LoanGroup $loanGroup
+     * @param Deal $deal
+     * @param Carbon $generatedDate
+     * @return KrollLoanGroup
+     */
+    public function loanGroup( LoanGroup $loanGroup, Deal $deal, Carbon $generatedDate ): KrollLoanGroup {
         $objectVars = get_object_vars( $loanGroup );
         $loans      = $objectVars[ 'loans' ];
         unset( $objectVars[ 'loans' ] );
@@ -20,7 +28,10 @@ class KrollLoanGroupFactory {
         $loanGroupUUID = $loanGroup->uuid;
 
         foreach ( $loans as $loan ):
-            $krollLoanFactory->loan( $loan, $deal, $loanGroupUUID, $generatedDate );
+            $krollLoanFactory->loan( $loan,
+                                     $deal,
+                                     $loanGroupUUID,
+                                     $generatedDate );
         endforeach;
 
         $objectVars[ 'pari_passu_details' ] = json_encode( $objectVars[ 'pari_passu_details' ] );
@@ -38,7 +49,7 @@ class KrollLoanGroupFactory {
 
         $krollLoanGroup = KrollLoanGroup::firstOrCreate( [
                                                              KrollLoanGroup::uuid           => $objectVars[ KrollLoanGroup::uuid ],
-                                                             KrollLoanGroup::generated_date => $objectVars[ KrollLoanGroup::generated_date ],
+                                                             KrollLoanGroup::generated_date => $generatedDate,
                                                          ], $objectVars );
         $krollLoanGroup->save();
 

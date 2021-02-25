@@ -2,6 +2,7 @@
 
 namespace DPRMC\LaravelKrollKCPDataFeed\Factories;
 
+use Carbon\Carbon;
 use DPRMC\KrollKCPDataFeedAPIClient\Bond;
 use DPRMC\KrollKCPDataFeedAPIClient\Deal;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollDeal;
@@ -32,8 +33,10 @@ class KrollDealFactory {
                                                ], $objectVars );
         $krollDeal->save();
 
-        $this->getKrollBondObjects( $deal, $objectVars[ KrollDeal::generated_date ] );
-        $this->getKrollLoanGroupObjects( $deal, $objectVars[ KrollDeal::generated_date ] );
+        $this->getKrollBondObjects( $deal,
+                                    $objectVars[ KrollDeal::generated_date ] );
+        $this->getKrollLoanGroupObjects( $deal,
+                                         $objectVars[ KrollDeal::generated_date ] );
 
         return $krollDeal;
     }
@@ -41,10 +44,10 @@ class KrollDealFactory {
 
     /**
      * @param Deal $deal
-     * @param string $generatedDate
+     * @param Carbon $generatedDate
      * @return array
      */
-    protected function getKrollBondObjects( Deal $deal, string $generatedDate ): array {
+    protected function getKrollBondObjects( Deal $deal, Carbon $generatedDate ): array {
         $objectVars = get_object_vars( $deal );
         /**
          * @var array $bonds An array of Bond objects.
@@ -57,7 +60,9 @@ class KrollDealFactory {
          * @var Bond $bond
          */
         foreach ( $bonds as $bond ):
-            $krollBond    = $krollBondFactory->bond( $bond, $deal, $generatedDate );
+            $krollBond    = $krollBondFactory->bond( $bond,
+                                                     $deal,
+                                                     $generatedDate );
             $krollBonds[] = $krollBond;
         endforeach;
 
@@ -65,7 +70,7 @@ class KrollDealFactory {
     }
 
 
-    protected function getKrollLoanGroupObjects( Deal $deal, string $generatedDate ): array {
+    protected function getKrollLoanGroupObjects( Deal $deal, Carbon $generatedDate ): array {
 
         $objectVars = get_object_vars( $deal );
 
@@ -80,7 +85,9 @@ class KrollDealFactory {
          * @var Bond LoanGroup
          */
         foreach ( $loanGroups as $loanGroup ):
-            $krollLoanGroup    = $krollLoanGroupFactory->loanGroup( $loanGroup, $deal, $generatedDate );
+            $krollLoanGroup    = $krollLoanGroupFactory->loanGroup( $loanGroup,
+                                                                    $deal,
+                                                                    $generatedDate );
             $krollLoanGroups[] = $krollLoanGroup;
         endforeach;
 
