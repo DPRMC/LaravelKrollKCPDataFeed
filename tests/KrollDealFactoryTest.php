@@ -2,6 +2,7 @@
 
 namespace DPRMC\Tests;
 
+use Carbon\Carbon;
 use DPRMC\KrollKCPDataFeedAPIClient\Client;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollDeal;
 
@@ -28,13 +29,25 @@ class KrollDealFactoryTest extends BaseTestCase {
         $this->assertIsArray( $dealEndpoints );
     }
 
+
+    /**
+     * @test
+     * @group rss
+     */
+    public function getRssSince() {
+        $carbonToday   = Carbon::now( 'America/New_York' );
+        $carbon        = $carbonToday->copy()->subDays( 1 );
+        $dealEndpoints = self::$client->rss( $carbon );
+        $this->assertIsArray( $dealEndpoints );
+    }
+
     /**
      * @test
      * @group deal_test
      */
     public function getDeal() {
         $uuid      = '74261474-7c48-553a-8833-3c5e0bdb9ffa';
-        $uuid = 'a24f89eb-ec1c-52ca-b1b3-efc8b03cf9c3';
+        $uuid      = 'a24f89eb-ec1c-52ca-b1b3-efc8b03cf9c3';
         $deal      = self::$client->downloadDeal( $uuid );
         $factory   = new \DPRMC\LaravelKrollKCPDataFeed\Factories\KrollDealFactory();
         $krollDeal = $factory->deal( $deal );
