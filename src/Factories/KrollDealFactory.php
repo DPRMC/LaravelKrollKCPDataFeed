@@ -81,6 +81,7 @@ class KrollDealFactory {
 
         $krollLoanGroups       = [];
         $krollLoanGroupFactory = new KrollLoanGroupFactory();
+
         /**
          * @var Bond LoanGroup
          */
