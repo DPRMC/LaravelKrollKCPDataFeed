@@ -12,8 +12,10 @@ class KrollDealFactory {
     public function __construct() {
     }
 
-    public function deal( Deal $deal ): KrollDeal {
+    public function deal( Deal $deal, string $linkUuid ): KrollDeal {
         $objectVars = get_object_vars( $deal );
+
+        $objectVars[KrollDeal::link_uuid] = $linkUuid;
 
         unset( $objectVars[ 'bonds' ] );
         unset( $objectVars[ 'loanGroups' ] );

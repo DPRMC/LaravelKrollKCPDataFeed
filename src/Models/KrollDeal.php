@@ -12,6 +12,12 @@ class KrollDeal extends AbstractKrollModel {
 
     public $table = 'kroll_deals';
 
+    // This is NOT the same as the UUID of the deal.
+    // This is the part of the link to be able to download the deal again.
+    // In the following example the link uuid is a24f89eb-ec1c-52ca-b1b3-efc8b03cf9c3
+    // Ex: https://kcp.krollbondratings.com/oauth/download/a24f89eb-ec1c-52ca-b1b3-efc8b03cf9c3?access_token=9be369ed2982534e52be1680849b4da1bfab0ad4
+    const link_uuid = 'link_uuid';
+
 
     const remit_date                                 = 'remit_date';
     const generated_date                             = 'generated_date';
