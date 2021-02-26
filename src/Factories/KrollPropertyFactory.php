@@ -20,7 +20,7 @@ class KrollPropertyFactory {
      * @param Loan $loan
      * @param string $loanGroupUUID
      * @param Deal $deal
-     * @param string $generatedDate
+     * @param Carbon $generatedDate
      * @return KrollProperty
      */
     public function property( Property $property,

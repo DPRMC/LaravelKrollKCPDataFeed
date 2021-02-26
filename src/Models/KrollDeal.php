@@ -2,6 +2,12 @@
 
 namespace DPRMC\LaravelKrollKCPDataFeed\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+/**
+ * Class KrollDeal
+ * @package DPRMC\LaravelKrollKCPDataFeed\Models
+ */
 class KrollDeal extends AbstractKrollModel {
 
     public $table = 'kroll_deals';
@@ -29,6 +35,9 @@ class KrollDeal extends AbstractKrollModel {
     const properties                  = 'properties';
 
 
+    /**
+     * @var string[]
+     */
     protected $casts = [
         self::uuid                                       => 'string',
         self::created_at                                 => 'datetime',
@@ -46,30 +55,47 @@ class KrollDeal extends AbstractKrollModel {
         self::projected_loss_percentage_original_balance => 'string',
     ];
 
-    // All attributes are mass assignable.
+
+    /**
+     * @var array All attributes are mass assignable.
+     */
     protected $guarded = [];
 
 
-    public function bonds() {
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function bonds(): HasMany {
         return $this->hasMany( KrollBond::class,
                                KrollBond::deal_uuid,
                                KrollDeal::uuid );
     }
 
-    public function loans() {
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function loans(): HasMany {
         return $this->hasMany( KrollLoan::class,
                                KrollLoan::deal_uuid,
                                KrollDeal::uuid );
     }
 
-    public function properties() {
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function properties(): HasMany {
         return $this->hasMany( KrollProperty::class,
                                KrollProperty::deal_uuid,
                                KrollDeal::uuid );
     }
 
 
-    public function loanGroups() {
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function loanGroups(): HasMany {
         return $this->hasMany( KrollLoanGroup::class,
                                KrollLoanGroup::deal_uuid,
                                KrollDeal::uuid );
@@ -78,8 +104,9 @@ class KrollDeal extends AbstractKrollModel {
 
     /**
      * @TODO I haven't seen any of these records yet.
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function paidOffLiquidatedLoanGroups() {
+    public function paidOffLiquidatedLoanGroups(): HasMany {
         return $this->hasMany( KrollLoanGroup::class,
                                KrollLoanGroup::deal_uuid,
                                KrollDeal::uuid );
