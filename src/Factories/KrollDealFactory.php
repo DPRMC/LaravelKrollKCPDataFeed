@@ -21,17 +21,6 @@ class KrollDealFactory {
         unset( $objectVars[ 'loanGroups' ] );
         unset( $objectVars[ 'paidOffLiquidatedLoanGroups' ] );
 
-        // Rename field
-//        $objectVars[ KrollDeal::remit_date ] = $objectVars[ 'remitDate' ];
-//        unset( $objectVars[ 'remitDate' ] );
-//
-//        // Rename field
-//        $objectVars[ KrollDeal::generated_date ] = $objectVars[ 'generatedDate' ];
-//        unset( $objectVars[ 'generatedDate' ] );
-//
-//        $objectVars[ KrollDeal::lead_analyst ] = $objectVars[ 'leadAnalyst' ];
-//        unset( $objectVars[ 'leadAnalyst' ] );
-
         $krollDeal = KrollDeal::firstOrCreate( [
                                                    KrollDeal::uuid           => $objectVars[ 'uuid' ],
                                                    KrollDeal::generated_date => $objectVars[ KrollDeal::generated_date ],
