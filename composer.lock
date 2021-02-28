@@ -8,20 +8,21 @@
     "packages": [
         {
             "name": "dprmc/kroll-kcp-data-feed-api-client",
-            "version": "v0.0.6",
+            "version": "v0.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DPRMC/KrollKCPDataFeedAPIClient.git",
-                "reference": "19653d743d21d1436c6722d059c35326bf7758fe"
+                "reference": "c7a6c95f1ad6d2a47d1f4388870d757790f022c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DPRMC/KrollKCPDataFeedAPIClient/zipball/19653d743d21d1436c6722d059c35326bf7758fe",
-                "reference": "19653d743d21d1436c6722d059c35326bf7758fe",
+                "url": "https://api.github.com/repos/DPRMC/KrollKCPDataFeedAPIClient/zipball/c7a6c95f1ad6d2a47d1f4388870d757790f022c3",
+                "reference": "c7a6c95f1ad6d2a47d1f4388870d757790f022c3",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
+                "ext-libxml": "*",
                 "ext-simplexml": "*",
                 "guzzlehttp/guzzle": "^6.0 | ^7.0",
                 "nesbot/carbon": "^2.36",
@@ -50,9 +51,9 @@
             "description": "A PHP client library to interface with the Kroll KCP Data Feed API.",
             "support": {
                 "issues": "https://github.com/DPRMC/KrollKCPDataFeedAPIClient/issues",
-                "source": "https://github.com/DPRMC/KrollKCPDataFeedAPIClient/tree/v0.0.6"
+                "source": "https://github.com/DPRMC/KrollKCPDataFeedAPIClient/tree/v0.0.7"
             },
-            "time": "2021-02-28T16:40:33+00:00"
+            "time": "2021-02-28T22:40:05+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
