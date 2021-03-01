@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "29d3158db02804e71b14d8dfb2496dca",
+    "content-hash": "f30d5541a44dfb14b01b4d1f53698627",
     "packages": [
         {
             "name": "dprmc/kroll-kcp-data-feed-api-client",
