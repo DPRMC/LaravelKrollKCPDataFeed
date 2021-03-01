@@ -43,9 +43,10 @@ class KrollLoanFactory {
         $krollLoan = KrollLoan::firstOrCreate( [
                                                    KrollLoan::uuid           => $objectVars[ 'uuid' ],
                                                    KrollLoan::generated_date => $generatedDate,
-                                               ],
-                                               $objectVars );
+                                               ]
+        );
         $krollLoan->save();
+        $krollLoan->update( $objectVars );
         return $krollLoan;
     }
 }

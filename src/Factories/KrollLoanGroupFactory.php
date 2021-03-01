@@ -50,8 +50,9 @@ class KrollLoanGroupFactory {
         $krollLoanGroup = KrollLoanGroup::firstOrCreate( [
                                                              KrollLoanGroup::uuid           => $objectVars[ KrollLoanGroup::uuid ],
                                                              KrollLoanGroup::generated_date => $generatedDate,
-                                                         ], $objectVars );
+                                                         ] );
         $krollLoanGroup->save();
+        $krollLoanGroup->update( $objectVars );
 
         return $krollLoanGroup;
     }

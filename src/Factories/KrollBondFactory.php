@@ -27,8 +27,9 @@ class KrollBondFactory {
         $krollBond = KrollBond::firstOrCreate( [
                                                    KrollBond::uuid           => $objectVars[ KrollBond::uuid ],
                                                    KrollBond::generated_date => $generatedDate,
-                                               ], $objectVars );
+                                               ] );
         $krollBond->save();
+        $krollBond->update($objectVars);
         return $krollBond;
     }
 

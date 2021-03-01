@@ -24,9 +24,8 @@ class KrollDealFactory {
         $krollDeal = KrollDeal::firstOrCreate( [
                                                    KrollDeal::uuid           => $objectVars[ 'uuid' ],
                                                    KrollDeal::generated_date => $objectVars[ KrollDeal::generated_date ],
-                                               ], $objectVars );
+                                               ] );
         $krollDeal->save();
-
         $krollDeal->update($objectVars);
 
         $this->getKrollBondObjects( $deal,

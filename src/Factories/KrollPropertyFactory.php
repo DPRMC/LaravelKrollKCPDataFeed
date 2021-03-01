@@ -40,9 +40,9 @@ class KrollPropertyFactory {
         $krollProperty = KrollProperty::firstOrCreate( [
                                                            KrollProperty::uuid           => $objectVars[ 'uuid' ],
                                                            KrollProperty::generated_date => $generatedDate,
-                                                       ],
-                                                       $objectVars );
+                                                       ] );
         $krollProperty->save();
+        $krollProperty->update( $objectVars );
         return $krollProperty;
     }
 }
