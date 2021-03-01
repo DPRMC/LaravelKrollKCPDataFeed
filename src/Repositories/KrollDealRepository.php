@@ -47,9 +47,8 @@ class KrollDealRepository {
     public function getLastGeneratedDate(): Carbon {
         return KrollDeal::select( [ KrollDeal::generated_date ] )
                         ->orderBy( KrollDeal::generated_date, 'DESC' )
-                        ->limit( 1 )
                         ->first()
-                        ->pluck( KrollDeal::generated_date );
+                        ->{KrollDeal::generated_date};
     }
 
 }

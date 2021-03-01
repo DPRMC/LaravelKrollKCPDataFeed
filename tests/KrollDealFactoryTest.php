@@ -5,6 +5,7 @@ namespace DPRMC\Tests;
 use Carbon\Carbon;
 use DPRMC\KrollKCPDataFeedAPIClient\Client;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollDeal;
+use DPRMC\LaravelKrollKCPDataFeed\Repositories\KrollDealRepository;
 
 class KrollDealFactoryTest extends BaseTestCase {
 
@@ -54,5 +55,9 @@ class KrollDealFactoryTest extends BaseTestCase {
         $krollDeal = $factory->deal( $deal, $uuid );
 
         $this->assertInstanceOf( KrollDeal::class, $krollDeal );
+
+        $krollDealRepository = new KrollDealRepository();
+        $mostRecentGeneratedDate = $krollDealRepository->getLastGeneratedDate();
+        $this->assertInstanceOf(Carbon::class, $mostRecentGeneratedDate);
     }
 }
