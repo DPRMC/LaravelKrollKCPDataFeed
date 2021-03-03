@@ -15,18 +15,16 @@ class KrollDealFactory {
     public function deal( Deal $deal, string $linkUuid ): KrollDeal {
         $objectVars = get_object_vars( $deal );
 
-        $objectVars[KrollDeal::link_uuid] = $linkUuid;
+        $objectVars[ KrollDeal::link_uuid ] = $linkUuid;
 
         unset( $objectVars[ 'bonds' ] );
         unset( $objectVars[ 'loanGroups' ] );
         unset( $objectVars[ 'paidOffLiquidatedLoanGroups' ] );
 
-        $krollDeal = KrollDeal::firstOrCreate( [
-                                                   KrollDeal::uuid           => $objectVars[ 'uuid' ],
-                                                   KrollDeal::generated_date => $objectVars[ KrollDeal::generated_date ],
-                                               ] );
-        $krollDeal->save();
-        $krollDeal->update($objectVars);
+        $krollDeal = KrollDeal::updateOrCreate( [
+                                                    KrollDeal::uuid           => $objectVars[ 'uuid' ],
+                                                    KrollDeal::generated_date => $objectVars[ KrollDeal::generated_date ],
+                                                ], $objectVars );
 
         $this->getKrollBondObjects( $deal,
                                     $objectVars[ KrollDeal::generated_date ] );

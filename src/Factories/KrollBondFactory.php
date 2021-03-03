@@ -24,13 +24,10 @@ class KrollBondFactory {
         $objectVars[ KrollBond::deal_uuid ]      = $deal->uuid;
         $objectVars[ KrollBond::generated_date ] = $generatedDate;
 
-        $krollBond = KrollBond::firstOrCreate( [
-                                                   KrollBond::uuid           => $objectVars[ KrollBond::uuid ],
-                                                   KrollBond::generated_date => $generatedDate,
-                                               ] );
-        $krollBond->save();
-        $krollBond->update($objectVars);
-        return $krollBond;
+        return KrollBond::updateOrCreate( [
+                                              KrollBond::uuid           => $objectVars[ KrollBond::uuid ],
+                                              KrollBond::generated_date => $generatedDate,
+                                          ], $objectVars );
     }
 
 

@@ -47,14 +47,10 @@ class KrollLoanGroupFactory {
         $objectVars[ 'deal_uuid' ]                    = $deal->uuid;
         $objectVars[ KrollLoanGroup::generated_date ] = $generatedDate;
 
-        $krollLoanGroup = KrollLoanGroup::firstOrCreate( [
-                                                             KrollLoanGroup::uuid           => $objectVars[ KrollLoanGroup::uuid ],
-                                                             KrollLoanGroup::generated_date => $generatedDate,
-                                                         ] );
-        $krollLoanGroup->save();
-        $krollLoanGroup->update( $objectVars );
-
-        return $krollLoanGroup;
+        return KrollLoanGroup::updateOrCreate( [
+                                                   KrollLoanGroup::uuid           => $objectVars[ KrollLoanGroup::uuid ],
+                                                   KrollLoanGroup::generated_date => $generatedDate,
+                                               ], $objectVars );
     }
 
 
