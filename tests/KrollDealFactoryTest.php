@@ -47,17 +47,18 @@ class KrollDealFactoryTest extends BaseTestCase {
      * @group deal_test
      */
     public function getDeal() {
-        $uuid      = '74261474-7c48-553a-8833-3c5e0bdb9ffa';
-        $uuid      = 'a24f89eb-ec1c-52ca-b1b3-efc8b03cf9c3';
-        $deal      = self::$client->downloadDeal( $uuid );
+        $uuid = '74261474-7c48-553a-8833-3c5e0bdb9ffa';
+        $uuid = 'a24f89eb-ec1c-52ca-b1b3-efc8b03cf9c3';
+        $uuid = 'ebc1f6b2-c1ce-5615-ad2a-ca2812796142';
+        $deal = self::$client->downloadDeal( $uuid );
 
         $factory   = new \DPRMC\LaravelKrollKCPDataFeed\Factories\KrollDealFactory();
         $krollDeal = $factory->deal( $deal, $uuid );
 
         $this->assertInstanceOf( KrollDeal::class, $krollDeal );
 
-        $krollDealRepository = new KrollDealRepository();
+        $krollDealRepository     = new KrollDealRepository();
         $mostRecentGeneratedDate = $krollDealRepository->getLastGeneratedDate();
-        $this->assertInstanceOf(Carbon::class, $mostRecentGeneratedDate);
+        $this->assertInstanceOf( Carbon::class, $mostRecentGeneratedDate );
     }
 }

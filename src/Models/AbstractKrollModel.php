@@ -8,6 +8,11 @@ use phpDocumentor\Reflection\Types\Self_;
 
 abstract class AbstractKrollModel extends Model {
 
+    // Now able to reference multi-column keys
+    // @see https://packagist.org/packages/awobaz/compoships
+    use \Awobaz\Compoships\Compoships;
+
+
     const id             = 'id';
     const uuid           = 'uuid';
     const generated_date = 'generated_date';

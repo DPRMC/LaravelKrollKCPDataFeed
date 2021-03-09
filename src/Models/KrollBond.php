@@ -85,9 +85,17 @@ class KrollBond extends AbstractKrollModel {
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function deal(): BelongsTo {
-        return $this->belongsTo( KrollDeal::class,
-                                 KrollBond::deal_uuid,
-                                 KrollDeal::uuid );
+//        return $this->belongsTo( KrollDeal::class,
+//                                 KrollBond::deal_uuid,
+//                                 KrollDeal::uuid );
+//
+//        return $this->belongsTo('A', ['foreignKey1', 'foreignKey2'], ['localKey1', 'localKey2']);
+
+        return $this->belongsTo(KrollDeal::class,
+                                [KrollDeal::uuid, KrollDeal::generated_date],
+                                [KrollBond::deal_uuid, KrollBond::generated_date]);
+
+
     }
 
 
