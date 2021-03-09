@@ -23,7 +23,7 @@ class KrollLoanRepository {
      * @return mixed
      */
     public function getByDealUUID( string $dealUUID ) {
-        return KrollLoan::where( KrollLoan::deal_uuid )
+        return KrollLoan::where( KrollLoan::deal_uuid, $dealUUID )
                         ->orderBy( KrollLoan::generated_date )
                         ->get();
     }

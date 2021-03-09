@@ -45,7 +45,7 @@ class KrollPropertyRepository {
      * @return mixed
      */
     public function getByDealUUID( string $dealUUID ) {
-        return KrollProperty::where( KrollProperty::deal_uuid )
+        return KrollProperty::where( KrollProperty::deal_uuid, $dealUUID )
                             ->orderBy( KrollProperty::generated_date )
                             ->get();
     }

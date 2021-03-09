@@ -19,7 +19,7 @@ class KrollBondRepository {
     public function getByCUSIP( string $cusip ) {
 
         return KrollBond::with( self::RELATIONSHIPS )
-                        ->where( KrollBond::cusip )
+                        ->where( KrollBond::cusip, $cusip )
                         ->orderBy( KrollBond::created_at )
                         ->get();
     }
@@ -30,7 +30,7 @@ class KrollBondRepository {
      * @return mixed
      */
     public function getByDealUUID( string $dealUUID ) {
-        return KrollBond::where( KrollBond::deal_uuid )
+        return KrollBond::where( KrollBond::deal_uuid, $dealUUID )
                         ->orderBy( KrollBond::generated_date )
                         ->get();
     }
