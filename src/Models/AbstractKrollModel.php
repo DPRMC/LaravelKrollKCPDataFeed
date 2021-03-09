@@ -4,13 +4,13 @@ namespace DPRMC\LaravelKrollKCPDataFeed\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use phpDocumentor\Reflection\Types\Self_;
 
 abstract class AbstractKrollModel extends Model {
 
     // Now able to reference multi-column keys
     // @see https://packagist.org/packages/awobaz/compoships
-    use \Awobaz\Compoships\Compoships;
+    // Not getting me exactly what I need...
+    //use \Awobaz\Compoships\Compoships;
 
 
     const id             = 'id';
