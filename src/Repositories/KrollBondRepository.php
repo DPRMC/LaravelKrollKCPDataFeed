@@ -17,9 +17,14 @@ class KrollBondRepository {
 
 
     public function getByCUSIP( string $cusip ) {
+        // For some reason this is causing an "Array to string conversion issue"
+        // Look into why the with() call would do this.
+//        return KrollBond::with( self::RELATIONSHIPS )
+//                        ->where( KrollBond::cusip, $cusip )
+//                        ->orderBy( KrollBond::created_at )
+//                        ->get();
 
-        return KrollBond::with( self::RELATIONSHIPS )
-                        ->where( KrollBond::cusip, $cusip )
+        return KrollBond::where( KrollBond::cusip, $cusip )
                         ->orderBy( KrollBond::created_at )
                         ->get();
     }
