@@ -2,29 +2,32 @@
 
 namespace DPRMC\LaravelKrollKCPDataFeed\Repositories;
 
-use Carbon\Carbon;
-use DPRMC\KrollKCPDataFeedAPIClient\Helper;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollBond;
-use DPRMC\LaravelKrollKCPDataFeed\Models\KrollDeal;
 
+
+/**
+ * Class KrollBondRepository
+ * @package DPRMC\LaravelKrollKCPDataFeed\Repositories
+ */
 class KrollBondRepository {
 
 
     /**
      *
      */
-    const RELATIONSHIPS = [ KrollBond::deal ];
+    const RELATIONSHIPS_TO_EAGER_LOAD = [
+        KrollBond::deal,
+        KrollBond::otherBonds
+    ];
 
 
+    /**
+     * @param string $cusip
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function getByCUSIP( string $cusip ) {
-        // For some reason this is causing an "Array to string conversion issue"
-        // Look into why the with() call would do this.
-//        return KrollBond::with( self::RELATIONSHIPS )
-//                        ->where( KrollBond::cusip, $cusip )
-//                        ->orderBy( KrollBond::created_at )
-//                        ->get();
-
-        return KrollBond::where( KrollBond::cusip, $cusip )
+        return KrollBond::with( self::RELATIONSHIPS_TO_EAGER_LOAD )
+                        ->where( KrollBond::cusip, $cusip )
                         ->orderBy( KrollBond::created_at )
                         ->get();
     }
@@ -35,10 +38,9 @@ class KrollBondRepository {
      * @return mixed
      */
     public function getByDealUUID( string $dealUUID ) {
-        return KrollBond::where( KrollBond::deal_uuid, $dealUUID )
+        return KrollBond::with( self::RELATIONSHIPS_TO_EAGER_LOAD )
+                        ->where( KrollBond::deal_uuid, $dealUUID )
                         ->orderBy( KrollBond::generated_date )
                         ->get();
     }
-
-
 }

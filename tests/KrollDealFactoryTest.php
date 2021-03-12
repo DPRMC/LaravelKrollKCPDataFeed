@@ -3,24 +3,10 @@
 namespace DPRMC\Tests;
 
 use Carbon\Carbon;
-use DPRMC\KrollKCPDataFeedAPIClient\Client;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollDeal;
 use DPRMC\LaravelKrollKCPDataFeed\Repositories\KrollDealRepository;
 
 class KrollDealFactoryTest extends BaseTestCase {
-
-    protected static $client;
-    protected static $debug = FALSE;
-
-    public static function setUpBeforeClass(): void {
-        self::$client = new Client( $_ENV[ 'KROLL_USER' ], $_ENV[ 'KROLL_PASS' ], self::$debug );
-    }
-
-
-    public function tearDown(): void {
-
-    }
-
 
     /**
      * @test

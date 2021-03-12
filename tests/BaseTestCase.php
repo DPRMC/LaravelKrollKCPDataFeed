@@ -2,7 +2,14 @@
 
 namespace DPRMC\Tests;
 
+use DPRMC\KrollKCPDataFeedAPIClient\Client;
+
 abstract class BaseTestCase extends \Orchestra\Testbench\TestCase {
+
+    protected static $client;
+    protected static $debug = FALSE;
+
+    const LINK_UUID = 'ebc1f6b2-c1ce-5615-ad2a-ca2812796142';
 
     protected function getEnvironmentSetUp( $app ) {
         // Setup default database to use sqlite :memory:
@@ -15,36 +22,18 @@ abstract class BaseTestCase extends \Orchestra\Testbench\TestCase {
             "database"                => "./tests/database.sqlite",
             "prefix"                  => "",
             "foreign_key_constraints" => FALSE,
-
-            //            'read'      => [
-            //                'host' => env( 'DB_CLUSTER_HOST' ),
-            //                'port' => env( 'DB_CLUSTER_PORT' ),
-            //            ],
-            //            'write'     => [
-            //                'host' => NULL,
-            //                'port' => NULL,
-            //            ],
-            //            'database'  => env( 'DB_CLUSTER_DATABASE' ),
-            //            'username'  => env( 'DB_CLUSTER_USERNAME' ),
-            //            'password'  => env( 'DB_CLUSTER_PASSWORD' ),
-            //            'charset'   => 'utf8',
-            //            'collation' => 'utf8_unicode_ci',
-            //            'prefix'    => '',
-            //            'sslmode'   => 'require',
-            //            'options'   => [
-            //                \PDO::MYSQL_ATTR_SSL_CA => 'digital-ocean-mysql-cluster-ca-certificate.crt',
-            //            ],
-            //            'strict'    => TRUE,
-            //            'engine'    => NULL,
-            //            'modes'     => [
-            //                'STRICT_TRANS_TABLES',
-            //                'NO_ZERO_IN_DATE',
-            //                'NO_ZERO_DATE',
-            //                'ERROR_FOR_DIVISION_BY_ZERO',
-            //                'NO_ENGINE_SUBSTITUTION',
-            //            ],
         ] );
     }
 
+
+    public static function setUpBeforeClass(): void {
+        self::$client = new Client( $_ENV[ 'KROLL_USER' ],
+                                    $_ENV[ 'KROLL_PASS' ],
+                                    self::$debug );
+    }
+
+    public function tearDown(): void {
+
+    }
 
 }

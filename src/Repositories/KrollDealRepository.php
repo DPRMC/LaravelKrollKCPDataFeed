@@ -5,25 +5,30 @@ namespace DPRMC\LaravelKrollKCPDataFeed\Repositories;
 use Carbon\Carbon;
 use DPRMC\KrollKCPDataFeedAPIClient\Helper;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollDeal;
+use Illuminate\Support\Collection;
 
+/**
+ * Class KrollDealRepository
+ * @package DPRMC\LaravelKrollKCPDataFeed\Repositories
+ */
 class KrollDealRepository {
 
 
     /**
      *
      */
-    const RELATIONSHIPS = [ KrollDeal::bonds,
-                            KrollDeal::loanGroups,
-                            KrollDeal::paidOffLiquidatedLoanGroups ];
+    const RELATIONSHIPS_TO_EAGER_LOAD = [ KrollDeal::bonds,
+                                          KrollDeal::loanGroups,
+                                          KrollDeal::paidOffLiquidatedLoanGroups ];
 
 
     /**
      * @param int $daysAgo
-     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getRecent( int $daysAgo = 7 ) {
+    public function getRecent( int $daysAgo = 7 ): Collection {
         $earliestDate = Carbon::now( Helper::CARBON_TIMEZONE )->subDays( $daysAgo );
-        return KrollDeal::with( self::RELATIONSHIPS )
+        return KrollDeal::with( self::RELATIONSHIPS_TO_EAGER_LOAD )
                         ->where( KrollDeal::generated_date, '<', $earliestDate )
                         ->orderBy( KrollDeal::generated_date )
                         ->get();
@@ -34,8 +39,8 @@ class KrollDealRepository {
      * @param string $uuid
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getByUuid( string $uuid ) {
-        return KrollDeal::with( self::RELATIONSHIPS )
+    public function getByUuid( string $uuid ): Collection {
+        return KrollDeal::with( self::RELATIONSHIPS_TO_EAGER_LOAD )
                         ->where( KrollDeal::uuid, $uuid )
                         ->get();
     }
@@ -48,7 +53,7 @@ class KrollDealRepository {
         return KrollDeal::select( [ KrollDeal::generated_date ] )
                         ->orderBy( KrollDeal::generated_date, 'DESC' )
                         ->first()
-                        ->{KrollDeal::generated_date};
+            ->{KrollDeal::generated_date};
     }
 
 }

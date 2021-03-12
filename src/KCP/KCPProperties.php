@@ -3,7 +3,7 @@
 namespace DPRMC\LaravelKrollKCPDataFeed\KCP;
 
 use Carbon\Carbon;
-use DPRMC\FIMS\API\V1\Modules\Helpers\FIMSHelper;
+use DPRMC\LaravelKrollKCPDataFeed\KCPHelpers\KCPHelper;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollLoanGroup;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollProperty;
 use DPRMC\LaravelKrollKCPDataFeed\Repositories\KrollBondRepository;
@@ -73,7 +73,7 @@ class KCPProperties {
 //            'Deal UUID'                                  => $last->{KrollProperty::deal_uuid},
             //            'Appraised Value Source' => $last->{KrollProperty::appraised_value_source},
             'Appraised Value'                            => number_format($last->{KrollProperty::appraised_value}),
-            'Appraisal Date'                             => FIMSHelper::formatFimsDate($last->{KrollProperty::appraisal_date}),
+            'Appraisal Date'                             => KCPHelper::formatDate($last->{KrollProperty::appraisal_date}),
             'Kbra Concluded Value'                       => $last->{KrollProperty::kbra_concluded_value},
             'Valuation Method'                           => $last->{KrollProperty::valuation_method},
             'Kbra Conservative Value'                    => $last->{KrollProperty::kbra_conservative_value},

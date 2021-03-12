@@ -2,10 +2,7 @@
 
 namespace DPRMC\LaravelKrollKCPDataFeed\Repositories;
 
-use Carbon\Carbon;
-use DPRMC\KrollKCPDataFeedAPIClient\Helper;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollBond;
-use DPRMC\LaravelKrollKCPDataFeed\Models\KrollDeal;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollLoanGroup;
 
 class KrollLoanGroupRepository {
@@ -14,7 +11,7 @@ class KrollLoanGroupRepository {
     /**
      *
      */
-    const RELATIONSHIPS = [ KrollBond::deal ];
+    const RELATIONSHIPS_TO_EAGER_LOAD = [ KrollBond::deal ];
 
 
     /**
@@ -22,10 +19,9 @@ class KrollLoanGroupRepository {
      * @return mixed
      */
     public function getByDealUUID( string $dealUUID ) {
-        return KrollLoanGroup::where( KrollLoanGroup::deal_uuid, $dealUUID )
+        return KrollLoanGroup::with( self::RELATIONSHIPS_TO_EAGER_LOAD )
+                             ->where( KrollLoanGroup::deal_uuid, $dealUUID )
                              ->orderBy( KrollLoanGroup::generated_date )
                              ->get();
     }
-
-
 }

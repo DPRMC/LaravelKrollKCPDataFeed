@@ -3,7 +3,8 @@
 namespace DPRMC\LaravelKrollKCPDataFeed\KCP;
 
 use Carbon\Carbon;
-use DPRMC\FIMS\API\V1\Modules\Helpers\FIMSHelper;
+
+use DPRMC\LaravelKrollKCPDataFeed\KCPHelpers\KCPHelper;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollLoanGroup;
 use DPRMC\LaravelKrollKCPDataFeed\Repositories\KrollBondRepository;
 use DPRMC\LaravelKrollKCPDataFeed\Repositories\KrollDealRepository;
@@ -70,7 +71,7 @@ class KCPLoanGroups {
             'Additional Debt Sub Secured'     => number_format( $last->{KrollLoanGroup::additional_debt_sub_secured} ),
             'Additional Debt Sub Mezz'        => number_format( $last->{KrollLoanGroup::additional_debt_sub_mezz} ),
             'Appraised Value'                 => number_format( $last->{KrollLoanGroup::appraised_value} ),
-            'Appraisal Date'                  => FIMSHelper::formatFimsDate( $last->{KrollLoanGroup::appraisal_date} ),
+            'Appraisal Date'                  => KCPHelper::formatDate( $last->{KrollLoanGroup::appraisal_date} ),
             'KBRA Concluded Value'            => number_format( $last->{KrollLoanGroup::kbra_concluded_value} ),
             'KLTV'                            => $last->{KrollLoanGroup::kltv},
             'Concluded KCP Modeled Loss'      => number_format( $last->{KrollLoanGroup::concluded_kcp_modeled_loss} ),
