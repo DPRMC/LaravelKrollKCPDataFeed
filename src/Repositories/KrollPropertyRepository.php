@@ -30,7 +30,8 @@ class KrollPropertyRepository {
     public function getRecent( int $daysAgo = 7 ): Collection {
         $earliestDate = Carbon::now( Helper::CARBON_TIMEZONE )->subDays( $daysAgo );
         return KrollProperty::with( self::RELATIONSHIPS_TO_EAGER_LOAD )
-                            ->where( KrollProperty::updated_at, '>', $earliestDate )
+                            ->where( KrollProperty::generated_date, '>', $earliestDate )
+                            ->orderBy( KrollProperty::generated_date )
                             ->get();
     }
 

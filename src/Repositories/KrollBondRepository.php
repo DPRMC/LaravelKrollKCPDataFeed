@@ -2,7 +2,10 @@
 
 namespace DPRMC\LaravelKrollKCPDataFeed\Repositories;
 
+use Carbon\Carbon;
+use DPRMC\KrollKCPDataFeedAPIClient\Helper;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollBond;
+use Illuminate\Support\Collection;
 
 
 /**
@@ -16,7 +19,7 @@ class KrollBondRepository {
      *
      */
     const RELATIONSHIPS_TO_EAGER_LOAD = [
-        KrollBond::deal
+        KrollBond::deal,
     ];
 
 
@@ -39,6 +42,19 @@ class KrollBondRepository {
     public function getByDealUUID( string $dealUUID ) {
         return KrollBond::with( self::RELATIONSHIPS_TO_EAGER_LOAD )
                         ->where( KrollBond::deal_uuid, $dealUUID )
+                        ->orderBy( KrollBond::generated_date )
+                        ->get();
+    }
+
+
+    /**
+     * @param int $daysAgo
+     * @return Collection
+     */
+    public function getRecent( int $daysAgo = 7 ): Collection {
+        $earliestDate = Carbon::now( Helper::CARBON_TIMEZONE )->subDays( $daysAgo );
+        return KrollBond::with( self::RELATIONSHIPS_TO_EAGER_LOAD )
+                        ->where( KrollBond::generated_date, '>', $earliestDate )
                         ->orderBy( KrollBond::generated_date )
                         ->get();
     }

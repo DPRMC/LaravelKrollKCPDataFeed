@@ -2,8 +2,10 @@
 
 namespace DPRMC\LaravelKrollKCPDataFeed\Repositories;
 
-use DPRMC\LaravelKrollKCPDataFeed\Models\KrollBond;
+use Carbon\Carbon;
+use DPRMC\KrollKCPDataFeedAPIClient\Helper;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollLoan;
+use Illuminate\Support\Collection;
 
 
 /**
@@ -31,5 +33,14 @@ class KrollLoanRepository {
                         ->where( KrollLoan::deal_uuid, $dealUUID )
                         ->orderBy( KrollLoan::generated_date )
                         ->get();
+    }
+
+
+    public function getRecent( int $daysAgo = 7 ): Collection {
+        $earliestDate = Carbon::now( Helper::CARBON_TIMEZONE )->subDays( $daysAgo );
+        return KrollLoan::with( self::RELATIONSHIPS_TO_EAGER_LOAD )
+                             ->where( KrollLoan::generated_date, '>', $earliestDate )
+                             ->orderBy( KrollLoan::generated_date )
+                             ->get();
     }
 }
