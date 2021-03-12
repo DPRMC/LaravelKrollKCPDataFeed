@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Cassandra\Exception\DivideByZeroException;
 use DPRMC\KrollKCPDataFeedAPIClient\Client;
 use DPRMC\KrollKCPDataFeedAPIClient\Deal;
+use DPRMC\LaravelKrollKCPDataFeed\Helpers\KrollHelper;
 use DPRMC\LaravelKrollKCPDataFeed\KCP\KCP;
 use DPRMC\LaravelKrollKCPDataFeed\KCP\KCPLoanGroups;
 use DPRMC\LaravelKrollKCPDataFeed\KCP\KCPProperties;
@@ -22,7 +23,9 @@ use Illuminate\Support\Facades\DB;
 
 class KrollRepositoryTest extends BaseTestCase {
 
-    const CUSIP = '78413MAA6';
+    const CUSIP         = '78413MAA6';
+    const INVALID_CUSIP = '78413MAA6_INVALID';
+    const DEAL_UUID     = '6804dafa-5ea2-50e9-bb39-bc9112266ea8';
 
     /**
      * @test
@@ -63,7 +66,6 @@ class KrollRepositoryTest extends BaseTestCase {
         $kcpLoanGroups = new KCPLoanGroups( $loanGroups );
         $kcpProperties = new KCPProperties( $properties );
 
-
         $this->assertInstanceOf( Deal::class, $deal );
         $this->assertInstanceOf( Collection::class, $recentDeals );
         $this->assertInstanceOf( Carbon::class, $lastGeneratedDate );
@@ -76,6 +78,20 @@ class KrollRepositoryTest extends BaseTestCase {
         $this->assertInstanceOf( KCPLoanGroups::class, $kcpLoanGroups );
         $this->assertInstanceOf( KCPProperties::class, $kcpProperties );
 
+
+        // Helper Tests
+        $dealUUIDFromCUSIP = KrollHelper::getDealUUIDFromCUSIP( self::CUSIP );
+        $this->assertEquals( self::DEAL_UUID, $dealUUIDFromCUSIP );
+
+        $kcpFromCUSIP = KrollHelper::getKCPByCUSIP( self::CUSIP );
+        $this->assertInstanceOf( KCP::class, $kcpFromCUSIP );
+
+        $shouldBeNull = KrollHelper::getKCPByCUSIP( self::INVALID_CUSIP );
+        $this->assertNull( $shouldBeNull );
+
+
+        $kcpFromDealUUID = KrollHelper::getKCP( self::DEAL_UUID );
+        $this->assertInstanceOf( KCP::class, $kcpFromDealUUID );
     }
 
 }

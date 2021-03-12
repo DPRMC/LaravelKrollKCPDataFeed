@@ -1,6 +1,6 @@
 <?php
 
-namespace DPRMC\LaravelKrollKCPDataFeed\KCPHelpers;
+namespace DPRMC\LaravelKrollKCPDataFeed\Helpers;
 
 use Carbon\Carbon;
 use DPRMC\LaravelKrollKCPDataFeed\Repositories\KrollBondRepository;

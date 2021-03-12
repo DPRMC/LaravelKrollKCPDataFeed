@@ -3,7 +3,7 @@
 namespace DPRMC\LaravelKrollKCPDataFeed\KCP;
 
 use Carbon\Carbon;
-use DPRMC\LaravelKrollKCPDataFeed\KCPHelpers\KCPHelper;
+use DPRMC\LaravelKrollKCPDataFeed\Helpers\KCPHelper;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollLoanGroup;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollProperty;
 use DPRMC\LaravelKrollKCPDataFeed\Repositories\KrollBondRepository;
