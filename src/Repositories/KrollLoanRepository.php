@@ -16,7 +16,10 @@ class KrollLoanRepository {
     /**
      *
      */
-    const RELATIONSHIPS_TO_EAGER_LOAD = [ KrollBond::deal ];
+    const RELATIONSHIPS_TO_EAGER_LOAD = [
+        KrollLoan::deal,
+        KrollLoan::loanGroup
+    ];
 
 
     /**

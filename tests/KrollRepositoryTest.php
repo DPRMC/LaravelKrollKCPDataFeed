@@ -11,6 +11,7 @@ use DPRMC\LaravelKrollKCPDataFeed\KCP\KCPLoanGroups;
 use DPRMC\LaravelKrollKCPDataFeed\KCP\KCPProperties;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollBond;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollDeal;
+use DPRMC\LaravelKrollKCPDataFeed\Models\KrollProperty;
 use DPRMC\LaravelKrollKCPDataFeed\Repositories\KrollBondRepository;
 use DPRMC\LaravelKrollKCPDataFeed\Repositories\KrollDealRepository;
 use DPRMC\LaravelKrollKCPDataFeed\Repositories\KrollLoanGroupRepository;
@@ -39,15 +40,10 @@ class KrollRepositoryTest extends BaseTestCase {
         $lastGeneratedDate = $dealRepo->getLastGeneratedDate();
 
 
-        $bondRepo = new KrollBondRepository();
-
+        $bondRepo     = new KrollBondRepository();
         $bondsByCUSIP = $bondRepo->getByCUSIP( self::CUSIP );
+        $bonds        = $bondRepo->getByDealUUID( $dealUUID );
 
-        DB::enableQueryLog();
-        $bonds      = $bondRepo->getByDealUUID( $dealUUID );
-        $firstBond  = $bonds->first();
-        $otherBonds = $firstBond->{KrollBond::otherBonds};
-        dump( DB::getQueryLog() );
 
         $loanGroupRepo = new KrollLoanGroupRepository();
         $loanGroups    = $loanGroupRepo->getByDealUUID( $dealUUID );
@@ -55,8 +51,12 @@ class KrollRepositoryTest extends BaseTestCase {
         $loanRepo = new KrollLoanRepository();
         $loans    = $loanRepo->getByDealUUID( $dealUUID );
 
-        $propertyRepo = new KrollPropertyRepository();
-        $properties   = $propertyRepo->getByDealUUID( $dealUUID );
+        $propertyRepo      = new KrollPropertyRepository();
+        $properties        = $propertyRepo->getByDealUUID( $dealUUID );
+        $firstProperty     = $properties->first();
+        $firstPropertyUUID = $firstProperty->{KrollProperty::uuid};
+        $recentProperties  = $propertyRepo->getRecent( 2 );
+        $propertiesByUUID  = $propertyRepo->getByUuid( $firstPropertyUUID );
 
 
         $kcp           = new KCP( $krollDeal->{KrollDeal::uuid}, $deals, $bonds, $loanGroups, $loans, $properties );
@@ -68,13 +68,14 @@ class KrollRepositoryTest extends BaseTestCase {
         $this->assertInstanceOf( Collection::class, $recentDeals );
         $this->assertInstanceOf( Carbon::class, $lastGeneratedDate );
         $this->assertInstanceOf( Collection::class, $bondsByCUSIP );
-        $this->assertInstanceOf( Collection::class, $otherBonds );
-        $this->assertFalse( $otherBonds->isEmpty() );
+        $this->assertInstanceOf( Collection::class, $recentProperties );
+        $this->assertInstanceOf( Collection::class, $propertiesByUUID );
 
         $this->assertInstanceOf( KrollDeal::class, $krollDeal );
         $this->assertInstanceOf( KCP::class, $kcp );
         $this->assertInstanceOf( KCPLoanGroups::class, $kcpLoanGroups );
         $this->assertInstanceOf( KCPProperties::class, $kcpProperties );
+
     }
 
 }

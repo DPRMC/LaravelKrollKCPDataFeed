@@ -16,8 +16,7 @@ class KrollBondRepository {
      *
      */
     const RELATIONSHIPS_TO_EAGER_LOAD = [
-        KrollBond::deal,
-        KrollBond::otherBonds
+        KrollBond::deal
     ];
 
 

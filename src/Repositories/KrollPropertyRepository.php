@@ -39,7 +39,7 @@ class KrollPropertyRepository {
      * @param string $uuid
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getByUuid( string $uuid ) {
+    public function getByUuid( string $uuid ): Collection {
         return KrollProperty::with( self::RELATIONSHIPS_TO_EAGER_LOAD )
                             ->where( KrollProperty::uuid, $uuid )
                             ->get();

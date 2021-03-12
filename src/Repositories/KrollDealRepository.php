@@ -18,8 +18,10 @@ class KrollDealRepository {
      *
      */
     const RELATIONSHIPS_TO_EAGER_LOAD = [ KrollDeal::bonds,
+                                          KrollDeal::loans,
                                           KrollDeal::loanGroups,
-                                          KrollDeal::paidOffLiquidatedLoanGroups ];
+                                          KrollDeal::paidOffLiquidatedLoanGroups,
+                                          KrollDeal::properties ];
 
 
     /**
