@@ -46,13 +46,16 @@ class KrollRepositoryTest extends BaseTestCase {
         $bondRepo     = new KrollBondRepository();
         $bondsByCUSIP = $bondRepo->getByCUSIP( self::CUSIP );
         $bonds        = $bondRepo->getByDealUUID( $dealUUID );
+        $recentBonds  = $bondRepo->getRecent( 30 );
 
 
-        $loanGroupRepo = new KrollLoanGroupRepository();
-        $loanGroups    = $loanGroupRepo->getByDealUUID( $dealUUID );
+        $loanGroupRepo    = new KrollLoanGroupRepository();
+        $loanGroups       = $loanGroupRepo->getByDealUUID( $dealUUID );
+        $recentLoanGroups = $loanGroupRepo->getRecent( 30 );
 
-        $loanRepo = new KrollLoanRepository();
-        $loans    = $loanRepo->getByDealUUID( $dealUUID );
+        $loanRepo    = new KrollLoanRepository();
+        $loans       = $loanRepo->getByDealUUID( $dealUUID );
+        $recentLoans = $loanRepo->getRecent( 30 );
 
         $propertyRepo      = new KrollPropertyRepository();
         $properties        = $propertyRepo->getByDealUUID( $dealUUID );
@@ -70,12 +73,20 @@ class KrollRepositoryTest extends BaseTestCase {
         $this->assertInstanceOf( Collection::class, $recentDeals );
         $this->assertInstanceOf( Carbon::class, $lastGeneratedDate );
         $this->assertInstanceOf( Collection::class, $bondsByCUSIP );
+        $this->assertInstanceOf( Collection::class, $recentBonds );
+        $this->assertTrue( $recentBonds->isNotEmpty() );
         $this->assertInstanceOf( Collection::class, $recentProperties );
         $this->assertInstanceOf( Collection::class, $propertiesByUUID );
 
         $this->assertInstanceOf( KrollDeal::class, $krollDeal );
         $this->assertInstanceOf( KCP::class, $kcp );
         $this->assertInstanceOf( KCPLoanGroups::class, $kcpLoanGroups );
+        $this->assertInstanceOf( Collection::class, $recentLoanGroups );
+        $this->assertTrue( $recentLoanGroups->isNotEmpty() );
+        $this->assertInstanceOf( Collection::class, $recentLoans );
+        $this->assertTrue( $recentLoans->isNotEmpty() );
+
+
         $this->assertInstanceOf( KCPProperties::class, $kcpProperties );
 
 
