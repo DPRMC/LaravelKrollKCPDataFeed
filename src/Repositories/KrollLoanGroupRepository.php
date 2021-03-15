@@ -37,7 +37,6 @@ class KrollLoanGroupRepository {
         $earliestDate = Carbon::now( Helper::CARBON_TIMEZONE )->subDays( $daysAgo );
         return KrollLoanGroup::with( self::RELATIONSHIPS_TO_EAGER_LOAD )
                              ->where( KrollLoanGroup::generated_date, '>', $earliestDate )
-                             ->orderBy( KrollLoanGroup::generated_date )
                              ->get();
     }
 }
