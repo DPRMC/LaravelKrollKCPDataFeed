@@ -84,7 +84,7 @@ class KrollLoanGroup extends AbstractKrollModel {
 
 
 
-    protected $casts = [
+    protected $childCasts = [
         self::deal_uuid                                  => 'string',
         self::uuid                                       => 'string',
         self::name                                       => 'string',
@@ -163,6 +163,10 @@ class KrollLoanGroup extends AbstractKrollModel {
         self::kbra_commentary                     => 'string',
     ];
 
+    public function __construct( array $attributes = [] ) {
+        parent::__construct( $attributes );
+        $this->casts = array_merge( $this->casts, $this->childCasts );
+    }
 
     // Relations
     const deal = 'deal';

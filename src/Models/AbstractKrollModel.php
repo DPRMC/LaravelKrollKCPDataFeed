@@ -23,19 +23,26 @@ abstract class AbstractKrollModel extends Model {
     public $primaryKey   = self::id;
     public $incrementing = TRUE;
 
+    public $casts = [
+        self::id             => 'integer',
+        self::uuid           => 'string',
+        self::generated_date => 'date',
+
+    ];
+
     public function __construct( array $attributes = [] ) {
-        $this->connection = env( 'DB_CONNECTION_KROLL_KCP_DATA_FEED', 'kroll' );
+        $this->connection = config( 'database.default', 'kroll' );
 
         $snakeCaseAttributes = [];
         foreach ( $attributes as $camelKey => $value ):
             $snakeCaseAttributes[ Str::snake( $camelKey ) ] = $value;
         endforeach;
 
-
         parent::__construct( $snakeCaseAttributes );
     }
 
     // All attributes are mass assignable.
     protected $guarded = [];
+
 
 }

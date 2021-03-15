@@ -44,7 +44,7 @@ class KrollDeal extends AbstractKrollModel {
     /**
      * @var string[]
      */
-    protected $casts = [
+    protected $childCasts = [
         self::uuid                                       => 'string',
         self::created_at                                 => 'datetime',
         self::updated_at                                 => 'datetime',
@@ -60,6 +60,11 @@ class KrollDeal extends AbstractKrollModel {
         self::projected_loss_percentage_current_balance  => 'string',
         self::projected_loss_percentage_original_balance => 'string',
     ];
+
+    public function __construct( array $attributes = [] ) {
+        parent::__construct( $attributes );
+        $this->casts = array_merge( $this->casts, $this->childCasts );
+    }
 
 
     /**

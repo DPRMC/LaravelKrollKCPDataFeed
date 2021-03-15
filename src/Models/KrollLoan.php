@@ -8,26 +8,6 @@ class KrollLoan extends AbstractKrollModel {
 
     public $table = 'kroll_loans';
 
-    // Relations
-    const deal = 'deal';
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function deal(): BelongsTo{
-        return $this->belongsTo(KrollDeal::class);
-    }
-
-    const loanGroup = 'loanGroup';
-
-    /**
-     * @return BelongsTo
-     */
-    public function loanGroup(): BelongsTo{
-        return $this->belongsTo(KrollLoanGroup::class);
-    }
-
-
     const deal_uuid       = 'deal_uuid';
     const loan_group_uuid = 'loan_group_uuid';
 
@@ -93,7 +73,7 @@ class KrollLoan extends AbstractKrollModel {
     const property                                   = 'property';
 
 
-    protected $casts = [
+    protected $childCasts = [
         self::uuid            => 'string',
         self::deal_uuid       => 'string',
         self::loan_group_uuid => 'string',
@@ -167,4 +147,29 @@ class KrollLoan extends AbstractKrollModel {
         self::servicer_commentary           => 'string',
     ];
 
+
+    public function __construct( array $attributes = [] ) {
+        parent::__construct( $attributes );
+        $this->casts = array_merge( $this->casts, $this->childCasts );
+    }
+
+
+    // Relations
+    const deal = 'deal';
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function deal(): BelongsTo{
+        return $this->belongsTo(KrollDeal::class);
+    }
+
+    const loanGroup = 'loanGroup';
+
+    /**
+     * @return BelongsTo
+     */
+    public function loanGroup(): BelongsTo{
+        return $this->belongsTo(KrollLoanGroup::class);
+    }
 }

@@ -35,7 +35,7 @@ class KrollBond extends AbstractKrollModel {
     const kbra_optimistic_losses_applied        = 'kbra_optimistic_losses_applied';
     const accumulated_interest_shortfalls       = 'accumulated_interest_shortfalls';
 
-    protected $casts = [
+    protected $childCasts = [
         self::uuid                                  => 'string',
         self::deal_uuid                             => 'string',
         self::name                                  => 'string',
@@ -74,9 +74,14 @@ class KrollBond extends AbstractKrollModel {
 
     ];
 
+    public function __construct( array $attributes = [] ) {
+        parent::__construct( $attributes );
+        $this->casts = array_merge( $this->casts, $this->childCasts );
+    }
+
 
     // Relations
-    const deal       = 'deal';
+    const deal = 'deal';
 
     /**
      * Relationship to the Deal that "owns" this Bond.

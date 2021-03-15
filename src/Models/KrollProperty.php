@@ -119,7 +119,7 @@ class KrollProperty extends AbstractKrollModel {
     const comp3_net_adjustments                      = 'comp3_net_adjustments';
     const comp4_net_adjustments                      = 'comp4_net_adjustments';
 
-    protected $casts = [
+    protected $childCasts = [
         self::uuid                                       => 'string',
         self::appraised_value                            => 'float',
         self::appraisal_date                             => 'date',
@@ -208,5 +208,10 @@ class KrollProperty extends AbstractKrollModel {
         self::comp3_net_adjustments              => 'string',
         self::comp4_net_adjustments              => 'string',
     ];
+
+    public function __construct( array $attributes = [] ) {
+        parent::__construct( $attributes );
+        $this->casts = array_merge( $this->casts, $this->childCasts );
+    }
 }
 

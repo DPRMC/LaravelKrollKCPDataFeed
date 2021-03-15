@@ -33,7 +33,7 @@ class KrollPariPassuDetails extends AbstractKrollModel {
     const created_at                       = 'created_at';
     const updated_at                       = 'updated_at';
 
-    protected $casts = [
+    protected $childCasts = [
 
         self::pari_passu                       => 'boolean',
         self::uuid                             => 'string',
@@ -52,5 +52,10 @@ class KrollPariPassuDetails extends AbstractKrollModel {
         self::created_at                       => 'datetime',
         self::updated_at                       => 'datetime'
     ];
+
+    public function __construct( array $attributes = [] ) {
+        parent::__construct( $attributes );
+        $this->casts = array_merge( $this->casts, $this->childCasts );
+    }
 
 }
