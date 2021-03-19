@@ -31,7 +31,7 @@ abstract class AbstractKrollModel extends Model {
     ];
 
     public function __construct( array $attributes = [] ) {
-        $this->connection = config( 'database.default', 'kroll' );
+        $this->connection = 'kroll';
 
         $snakeCaseAttributes = [];
         foreach ( $attributes as $camelKey => $value ):

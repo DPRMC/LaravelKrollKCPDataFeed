@@ -15,7 +15,7 @@ abstract class BaseTestCase extends \Orchestra\Testbench\TestCase {
         // Setup default database to use sqlite :memory:
 
 
-        $app[ 'config' ]->set( 'database.default', env( 'DB_CONNECTION_KROLL_KCP_DATA_FEED' ) );
+//        $app[ 'config' ]->set( 'database.default', env( 'DB_CONNECTION_KROLL_KCP_DATA_FEED' ) );
         $app[ 'config' ]->set( 'database.connections.kroll', [
             'driver'                  => 'sqlite',
             "url"                     => NULL,
