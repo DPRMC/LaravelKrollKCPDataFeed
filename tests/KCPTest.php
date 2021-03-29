@@ -2,8 +2,6 @@
 
 namespace DPRMC\Tests;
 
-use Carbon\Carbon;
-use DPRMC\KrollKCPDataFeedAPIClient\Client;
 use DPRMC\KrollKCPDataFeedAPIClient\Deal;
 use DPRMC\LaravelKrollKCPDataFeed\KCP\KCP;
 use DPRMC\LaravelKrollKCPDataFeed\KCP\KCPLoanGroups;
@@ -54,6 +52,11 @@ class KCPTest extends BaseTestCase {
         $this->assertInstanceOf( KCP::class, $kcp );
         $this->assertInstanceOf( KCPLoanGroups::class, $kcpLoanGroups );
         $this->assertInstanceOf( KCPProperties::class, $kcpProperties );
+
+
+        dump($kcp->getMostRecentLoans($krollDeal));
+//
+//        dump( $kcp );
     }
 
 }
