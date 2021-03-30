@@ -3,10 +3,12 @@
 namespace DPRMC\Tests;
 
 use DPRMC\KrollKCPDataFeedAPIClient\Deal;
+use DPRMC\LaravelKrollKCPDataFeed\KCP\Alerts\LoanMovementAlert;
 use DPRMC\LaravelKrollKCPDataFeed\KCP\KCP;
 use DPRMC\LaravelKrollKCPDataFeed\KCP\KCPLoanGroups;
 use DPRMC\LaravelKrollKCPDataFeed\KCP\KCPProperties;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollDeal;
+use DPRMC\LaravelKrollKCPDataFeed\Models\KrollLoan;
 use DPRMC\LaravelKrollKCPDataFeed\Repositories\KrollBondRepository;
 use DPRMC\LaravelKrollKCPDataFeed\Repositories\KrollDealRepository;
 use DPRMC\LaravelKrollKCPDataFeed\Repositories\KrollLoanGroupRepository;
@@ -42,9 +44,20 @@ class KCPTest extends BaseTestCase {
         $properties   = $propertyRepo->getByDealUUID( $dealUUID );
 
 
-        $kcp           = new KCP( $krollDeal->{KrollDeal::uuid}, $deals, $bonds, $loanGroups, $loans, $properties );
-        $kcpLoanGroups = new KCPLoanGroups( $loanGroups );
-        $kcpProperties = new KCPProperties( $properties );
+        $loanMovementAlerts = [
+            new LoanMovementAlert( KrollLoan::optimistic_kcp_modeled_loss, .01 ),
+            new LoanMovementAlert( KrollLoan::conservative_kcp_modeled_loss, .01 ),
+            new LoanMovementAlert( KrollLoan::concluded_kcp_modeled_loss, .01 ),
+        ];
+        $kcp                = new KCP( $krollDeal->{KrollDeal::uuid},
+                                       $deals,
+                                       $bonds,
+                                       $loanGroups,
+                                       $loans,
+                                       $properties,
+                                       $loanMovementAlerts );
+        $kcpLoanGroups      = new KCPLoanGroups( $loanGroups );
+        $kcpProperties      = new KCPProperties( $properties );
 
 
         $this->assertInstanceOf( Deal::class, $deal );
@@ -53,10 +66,7 @@ class KCPTest extends BaseTestCase {
         $this->assertInstanceOf( KCPLoanGroups::class, $kcpLoanGroups );
         $this->assertInstanceOf( KCPProperties::class, $kcpProperties );
 
-
-        dump($kcp->getMostRecentLoans($krollDeal));
-//
-//        dump( $kcp );
+        $this->assertNotEmpty($kcp->loanMovement);
     }
 
 }

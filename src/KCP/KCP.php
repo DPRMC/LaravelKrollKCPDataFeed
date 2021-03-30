@@ -3,6 +3,7 @@
 namespace DPRMC\LaravelKrollKCPDataFeed\KCP;
 
 use Carbon\Carbon;
+use DPRMC\LaravelKrollKCPDataFeed\KCP\Alerts\LoanMovementAlert;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollBond;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollDeal;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollLoan;
@@ -36,6 +37,7 @@ class KCP {
     const properties = 'properties';
     public $properties;
 
+    public $alerts = [];
 
     public $loanMovement = [];
 
@@ -47,13 +49,15 @@ class KCP {
      * @param Collection $loanGroups
      * @param Collection $loans
      * @param Collection $properties
+     * @param array $gates
      */
     public function __construct( string $dealUUID,
                                  Collection $deals,
                                  Collection $bonds,
                                  Collection $loanGroups,
                                  Collection $loans,
-                                 Collection $properties ) {
+                                 Collection $properties,
+                                 array $gates = [] ) {
 
         $this->dealUUID = $dealUUID;
         $this->deals    = $deals->sortBy( KrollDeal::generated_date );
@@ -61,6 +65,8 @@ class KCP {
         $this->loanGroups = $loanGroups->sortBy( KrollLoanGroup::generated_date );
         $this->loans      = $loans->sortBy( KrollLoan::generated_date );
         $this->properties = $properties->sortBy( KrollProperty::generated_date );
+
+        $this->alerts = $gates;
 
         $this->setLoanMovement();
     }
@@ -194,9 +200,26 @@ class KCP {
         // calculate the percent change, then
         // add that percent change field to the data set for the currently iterated model.
 
-        $loansGroupedByUUID = $this->{self::loans}->groupBy(KrollLoan::uuid);
+        $loansGroupedByUUID = $this->{self::loans}->groupBy( KrollLoan::uuid );
 
-        dd($loansGroupedByUUID);
+        foreach ( $loansGroupedByUUID as $loanUUID => $loanSet ):
+            foreach ( $loanSet as $loan ):
+                $previousLoan = $this->getPreviousModel( self::loans, $loan );
+
+                /**
+                 * @var LoanMovementAlert $alert
+                 */
+                foreach ( $this->alerts as $alert ):
+                    $percentChange = $alert->triggered( $loan, $previousLoan );
+                    if ( $percentChange ):
+                        $this->loanMovement
+                        [ $loanUUID ]
+                        [ $loan->{KrollLoan::generated_date}->toDateString() ]
+                        [ $alert->field ] = $percentChange;
+                    endif;
+                endforeach;
+            endforeach;
+        endforeach;
     }
 
 }

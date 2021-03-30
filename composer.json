@@ -18,7 +18,8 @@
   "require": {
     "ext-json": "*",
     "dprmc/kroll-kcp-data-feed-api-client": "^0.0",
-    "awobaz/compoships": "^2.0"
+    "awobaz/compoships": "^2.0",
+    "michaeldrennen/stats": "^0.0.2"
   },
   "minimum-stability": "stable",
   "autoload": {
