@@ -61,6 +61,8 @@ class KCP {
         $this->loanGroups = $loanGroups->sortBy( KrollLoanGroup::generated_date );
         $this->loans      = $loans->sortBy( KrollLoan::generated_date );
         $this->properties = $properties->sortBy( KrollProperty::generated_date );
+
+        $this->setLoanMovement();
     }
 
 
@@ -95,7 +97,7 @@ class KCP {
         /**
          * No necessary, but the index provides a little extra information.
          */
-        $mostRecentThings = $mostRecentThings->keyBy('uuid');
+        $mostRecentThings = $mostRecentThings->keyBy( 'uuid' );
 
         return $mostRecentThings;
     }
@@ -142,22 +144,29 @@ class KCP {
 
 
     /**
+     * Given an "anchorModel" and a Collection to look in, this method will
+     * return the chronologically previous model relative to our anchorModel.
      * @param string $property
      * @param $anchorModel
      * @return mixed|null
+     * @throws \Exception
      */
     public function getPreviousModel( string $property, $anchorModel ) {
 
+        // If there is only one model in this collection, then
+        // there can't be a previous model.
         if ( 1 == $this->{$property}->count() ):
             return NULL;
         endif;
 
         $currentDate   = NULL;
         $previousModel = NULL;
+
+        // Let's loop through every model in this Collection
         foreach ( $this->{$property} as $model ):
 
             /**
-             * @var Carbon $iteratedDate
+             * @var Carbon $iteratedDate The Carbon date of the currently iterated model
              */
             $iteratedDate = $model->generated_date;
 
@@ -167,8 +176,27 @@ class KCP {
                 return $previousModel;
             endif;
 
+            // We haven't reached our anchor model in the iterated collection, so
+            // set the currently iterated model to the previous model so we can
+            // check the next model in the collection to see if it's our anchor model.
             $previousModel = $model;
         endforeach;
+
+        throw new \Exception( "We were unable to find the previous model in " . $property );
+    }
+
+
+    public function setLoanMovement() {
+        // Group all of the loans by their UUID sorted by generated_date
+        //
+        // Foreach of the loanSets (by UUID), compare the fields in the currently
+        // iterated model against the fields in the "previousModel", and
+        // calculate the percent change, then
+        // add that percent change field to the data set for the currently iterated model.
+
+        $loansGroupedByUUID = $this->{self::loans}->groupBy(KrollLoan::uuid);
+
+        dd($loansGroupedByUUID);
     }
 
 }
