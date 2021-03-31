@@ -4,11 +4,13 @@ namespace DPRMC\LaravelKrollKCPDataFeed\KCP;
 
 use Carbon\Carbon;
 use DPRMC\LaravelKrollKCPDataFeed\KCP\Alerts\LoanMovementAlert;
-use DPRMC\LaravelKrollKCPDataFeed\Models\KrollBond;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollDeal;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollLoan;
-use DPRMC\LaravelKrollKCPDataFeed\Models\KrollLoanGroup;
-use DPRMC\LaravelKrollKCPDataFeed\Models\KrollProperty;
+use DPRMC\LaravelKrollKCPDataFeed\Repositories\KrollBondRepository;
+use DPRMC\LaravelKrollKCPDataFeed\Repositories\KrollDealRepository;
+use DPRMC\LaravelKrollKCPDataFeed\Repositories\KrollLoanGroupRepository;
+use DPRMC\LaravelKrollKCPDataFeed\Repositories\KrollLoanRepository;
+use DPRMC\LaravelKrollKCPDataFeed\Repositories\KrollPropertyRepository;
 use Illuminate\Support\Collection;
 
 /**
@@ -41,30 +43,23 @@ class KCP {
 
     public $loanMovement = [];
 
-    /**
-     * KCP constructor.
-     * @param string $dealUUID
-     * @param Collection $deals
-     * @param Collection $bonds
-     * @param Collection $loanGroups
-     * @param Collection $loans
-     * @param Collection $properties
-     * @param array $gates
-     */
-    public function __construct( string $dealUUID,
-                                 Collection $deals,
-                                 Collection $bonds,
-                                 Collection $loanGroups,
-                                 Collection $loans,
-                                 Collection $properties,
-                                 array $gates = [] ) {
-
+    public function __construct(string $dealUUID, array $gates=[]) {
         $this->dealUUID = $dealUUID;
-        $this->deals    = $deals->sortBy( KrollDeal::generated_date );
-        $this->bonds    = $bonds->sortBy( KrollBond::generated_date );;
-        $this->loanGroups = $loanGroups->sortBy( KrollLoanGroup::generated_date );
-        $this->loans      = $loans->sortBy( KrollLoan::generated_date );
-        $this->properties = $properties->sortBy( KrollProperty::generated_date );
+
+        $dealRepo    = new KrollDealRepository();
+        $this->deals = $dealRepo->getByUuid($dealUUID);
+
+        $bondRepo = new KrollBondRepository();
+        $this->bonds = $bondRepo->getByDealUUID($dealUUID);
+
+        $loanGroupRepo = new KrollLoanGroupRepository();
+        $this->loanGroups = $loanGroupRepo->getByDealUUID($dealUUID);
+
+        $loanRepo = new KrollLoanRepository();
+        $this->loans = $loanRepo->getByDealUUID($dealUUID);
+
+        $propertyRepo = new KrollPropertyRepository();
+        $this->properties = $propertyRepo->getByDealUUID($dealUUID);
 
         $this->alerts = $gates;
 
