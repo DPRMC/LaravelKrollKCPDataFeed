@@ -50,11 +50,6 @@ class KCPTest extends BaseTestCase {
             new LoanMovementAlert( KrollLoan::concluded_kcp_modeled_loss, .01 ),
         ];
         $kcp                = new KCP( $krollDeal->{KrollDeal::uuid},
-                                       $deals,
-                                       $bonds,
-                                       $loanGroups,
-                                       $loans,
-                                       $properties,
                                        $loanMovementAlerts );
         $kcpLoanGroups      = new KCPLoanGroups( $loanGroups );
         $kcpProperties      = new KCPProperties( $properties );

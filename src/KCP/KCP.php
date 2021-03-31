@@ -43,7 +43,13 @@ class KCP {
 
     public $loanMovement = [];
 
-    public function __construct(string $dealUUID, array $gates=[]) {
+
+    /**
+     * KCP constructor.
+     * @param string $dealUUID
+     * @param array $alerts
+     */
+    public function __construct(string $dealUUID, array $alerts=[]) {
         $this->dealUUID = $dealUUID;
 
         $dealRepo    = new KrollDealRepository();
@@ -61,7 +67,7 @@ class KCP {
         $propertyRepo = new KrollPropertyRepository();
         $this->properties = $propertyRepo->getByDealUUID($dealUUID);
 
-        $this->alerts = $gates;
+        $this->alerts = $alerts;
 
         $this->setLoanMovement();
     }
