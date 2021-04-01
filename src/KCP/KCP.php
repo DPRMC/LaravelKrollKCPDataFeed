@@ -4,6 +4,7 @@ namespace DPRMC\LaravelKrollKCPDataFeed\KCP;
 
 use Carbon\Carbon;
 use DPRMC\LaravelKrollKCPDataFeed\KCP\Alerts\LoanMovementAlert;
+use DPRMC\LaravelKrollKCPDataFeed\Models\KrollBond;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollDeal;
 use DPRMC\LaravelKrollKCPDataFeed\Models\KrollLoan;
 use DPRMC\LaravelKrollKCPDataFeed\Repositories\KrollBondRepository;
@@ -43,31 +44,76 @@ class KCP {
 
     public $loanMovement = [];
 
+    /**
+     * @var
+     */
+    public $deal_name;
+    public $download_link;
+    public $generated_date;
+    public $remit_date;
+    public $lead_analyst;
+    public $lead_analyst_email;
+    public $lead_analyst_phone;
+    public $backup_analyst;
+    public $backup_analyst_email;
+    public $backup_analyst_phone;
+    public $projected_loss_percentage_current_balance;
+    public $projected_loss_percentage_original_balance;
+
+    public $cusips;
+    public $currentHoldings  = [];
+    public $monthEndHoldings = [];
+    public $currentlyHeld    = [];
+    public $everHeld         = [];
+
+    protected function setDealData() {
+        $deal                                             = $this->deals->last();
+        $this->deal_name                                  = $deal->{KrollDeal::name};
+        $this->download_link                              = 'https://kcp.krollbondratings.com/oauth/download/' . $deal->{KrollDeal::link_uuid};
+        $this->generated_date                             = $deal->{KrollDeal::generated_date};
+        $this->remit_date                                 = $deal->{KrollDeal::remit_date};
+        $this->lead_analyst                               = $deal->{KrollDeal::lead_analyst};
+        $this->lead_analyst_email                         = $deal->{KrollDeal::lead_analyst_email};
+        $this->lead_analyst_phone                         = $deal->{KrollDeal::lead_analyst_phone_number};
+        $this->backup_analyst                             = $deal->{KrollDeal::backup_analyst};
+        $this->backup_analyst_email                       = $deal->{KrollDeal::backup_analyst_email};
+        $this->backup_analyst_phone                       = $deal->{KrollDeal::backup_analyst_phone_number};
+        $this->projected_loss_percentage_current_balance  = $deal->{KrollDeal::projected_loss_percentage_current_balance};
+        $this->projected_loss_percentage_original_balance = $deal->{KrollDeal::projected_loss_percentage_original_balance};
+    }
+
+    protected function setCUSIPList() {
+        $this->cusips = $this->bonds->pluck( KrollBond::cusip )->unique()->toArray();
+    }
+
 
     /**
      * KCP constructor.
      * @param string $dealUUID
      * @param array $alerts
      */
-    public function __construct(string $dealUUID, array $alerts=[]) {
+    public function __construct( string $dealUUID, array $alerts = [] ) {
         $this->dealUUID = $dealUUID;
 
         $dealRepo    = new KrollDealRepository();
-        $this->deals = $dealRepo->getByUuid($dealUUID);
+        $this->deals = $dealRepo->getByUuid( $dealUUID );
 
-        $bondRepo = new KrollBondRepository();
-        $this->bonds = $bondRepo->getByDealUUID($dealUUID);
+        $bondRepo    = new KrollBondRepository();
+        $this->bonds = $bondRepo->getByDealUUID( $dealUUID );
 
-        $loanGroupRepo = new KrollLoanGroupRepository();
-        $this->loanGroups = $loanGroupRepo->getByDealUUID($dealUUID);
+        $loanGroupRepo    = new KrollLoanGroupRepository();
+        $this->loanGroups = $loanGroupRepo->getByDealUUID( $dealUUID );
 
-        $loanRepo = new KrollLoanRepository();
-        $this->loans = $loanRepo->getByDealUUID($dealUUID);
+        $loanRepo    = new KrollLoanRepository();
+        $this->loans = $loanRepo->getByDealUUID( $dealUUID );
 
-        $propertyRepo = new KrollPropertyRepository();
-        $this->properties = $propertyRepo->getByDealUUID($dealUUID);
+        $propertyRepo     = new KrollPropertyRepository();
+        $this->properties = $propertyRepo->getByDealUUID( $dealUUID );
 
         $this->alerts = $alerts;
+
+        $this->setDealData();
+        $this->setCUSIPList();
 
         $this->setLoanMovement();
     }
@@ -115,7 +161,8 @@ class KCP {
      * @param KrollDeal $deal
      * @return Collection
      */
-    public function getMostRecentLoans( KrollDeal $deal ): Collection {
+    public function getMostRecentLoans(): Collection {
+        $deal = $this->getMostRecentDeal();
         return $this->getMostRecent( $deal, KrollDeal::loans );
     }
 
@@ -125,7 +172,8 @@ class KCP {
      * @param KrollDeal $deal
      * @return Collection
      */
-    public function getMostRecentProperties( KrollDeal $deal ): Collection {
+    public function getMostRecentProperties(): Collection {
+        $deal = $this->getMostRecentDeal();
         return $this->getMostRecent( $deal, KrollDeal::properties );
     }
 
@@ -135,7 +183,8 @@ class KCP {
      * @param KrollDeal $deal
      * @return Collection
      */
-    public function getMostRecentLoanGroups( KrollDeal $deal ): Collection {
+    public function getMostRecentLoanGroups(): Collection {
+        $deal = $this->getMostRecentDeal();
         return $this->getMostRecent( $deal, KrollDeal::loanGroups );
     }
 
@@ -145,7 +194,8 @@ class KCP {
      * @param KrollDeal $deal
      * @return Collection
      */
-    public function getMostRecentBonds( KrollDeal $deal ): Collection {
+    public function getMostRecentBonds(): Collection {
+        $deal = $this->getMostRecentDeal();
         return $this->getMostRecent( $deal, KrollDeal::bonds );
     }
 

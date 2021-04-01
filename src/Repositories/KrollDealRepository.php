@@ -44,6 +44,7 @@ class KrollDealRepository {
     public function getByUuid( string $uuid ): Collection {
         return KrollDeal::with( self::RELATIONSHIPS_TO_EAGER_LOAD )
                         ->where( KrollDeal::uuid, $uuid )
+                        ->orderBy( KrollDeal::generated_date )
                         ->get();
     }
 
