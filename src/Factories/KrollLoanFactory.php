@@ -40,6 +40,22 @@ class KrollLoanFactory {
         $objectVars[ KrollLoan::loan_group_uuid ] = $loanGroupUUID;
         $objectVars[ KrollLoan::generated_date ]  = $generatedDate;
 
+        // These properties need to be massaged a bit.
+        $objectVars[ KrollLoan::concluded_kcp_modeled_loss ] =
+            !is_numeric( $objectVars[ KrollLoan::concluded_kcp_modeled_loss ] ) && empty( $objectVars[ KrollLoan::concluded_kcp_modeled_loss ] )
+                ? NULL
+                : $objectVars[ KrollLoan::concluded_kcp_modeled_loss ];
+
+        $objectVars[ KrollLoan::conservative_kcp_modeled_loss ] =
+            !is_numeric( $objectVars[ KrollLoan::conservative_kcp_modeled_loss ] ) && empty( $objectVars[ KrollLoan::conservative_kcp_modeled_loss ] )
+                ? NULL
+                : $objectVars[ KrollLoan::conservative_kcp_modeled_loss ];
+
+        $objectVars[ KrollLoan::optimistic_kcp_modeled_loss ] =
+            !is_numeric( $objectVars[ KrollLoan::optimistic_kcp_modeled_loss ] ) && empty( $objectVars[ KrollLoan::optimistic_kcp_modeled_loss ] )
+                ? NULL
+                : $objectVars[ KrollLoan::optimistic_kcp_modeled_loss ];
+
         return KrollLoan::updateOrCreate( [
                                               KrollLoan::uuid           => $objectVars[ 'uuid' ],
                                               KrollLoan::generated_date => $generatedDate,
