@@ -36,6 +36,7 @@ class KCP {
 
     const loans = 'loans';
     public $loans;
+    public $loansByUUID;
 
     const properties = 'properties';
     public $properties;
@@ -104,8 +105,9 @@ class KCP {
         $loanGroupRepo    = new KrollLoanGroupRepository();
         $this->loanGroups = $loanGroupRepo->getByDealUUID( $dealUUID );
 
-        $loanRepo    = new KrollLoanRepository();
-        $this->loans = $loanRepo->getByDealUUID( $dealUUID );
+        $loanRepo          = new KrollLoanRepository();
+        $this->loans       = $loanRepo->getByDealUUID( $dealUUID );
+        $this->loansByUUID = $this->loans->groupBy( KrollLoan::uuid );
 
         $propertyRepo     = new KrollPropertyRepository();
         $this->properties = $propertyRepo->getByDealUUID( $dealUUID );

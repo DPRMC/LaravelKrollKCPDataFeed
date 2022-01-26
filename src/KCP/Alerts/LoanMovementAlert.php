@@ -38,7 +38,7 @@ class LoanMovementAlert {
 
         if ( $this->reportAllMovement ):
             return $percentChange;
-        elseif ( $percentChange >= $this->percentChangeThatWillTriggerAlert ):
+        elseif ( abs($percentChange) >= $this->percentChangeThatWillTriggerAlert ):
             return $percentChange;
         endif;
         return FALSE;
