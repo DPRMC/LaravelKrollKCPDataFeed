@@ -11,15 +11,15 @@
   ],
   "require-dev": {
     "phpunit/phpunit": "^9.4",
-    "php-coveralls/php-coveralls": "^2.4",
-    "laravel/framework": "^6.18.25||^7.0||^8.0",
-    "orchestra/testbench": "4.11.0"
+    "php-coveralls/php-coveralls": "^2.0",
+    "laravel/framework": "^6.0|^7.0|^8.0",
+    "orchestra/testbench": "^4.0"
   },
   "require": {
     "ext-json": "*",
     "dprmc/kroll-kcp-data-feed-api-client": "^0.0",
     "awobaz/compoships": "^2.0",
-    "michaeldrennen/stats": "^0.0.2"
+    "michaeldrennen/stats": "^0.0"
   },
   "minimum-stability": "stable",
   "autoload": {
