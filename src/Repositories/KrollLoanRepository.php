@@ -43,4 +43,15 @@ class KrollLoanRepository {
                              ->orderBy( KrollLoan::generated_date )
                              ->get();
     }
+
+    /**
+     * @param $servicerLoanId
+     * @return Collection
+     */
+    public function getAllByServicerLoanId( $servicerLoanId ): Collection {
+        return KrollLoan::with( self::RELATIONSHIPS_TO_EAGER_LOAD )
+                        ->where( KrollLoan::servicer_loan_id,  $servicerLoanId )
+                        ->orderBy( KrollLoan::generated_date )
+                        ->get();
+    }
 }
