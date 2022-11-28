@@ -58,4 +58,11 @@ class KrollPropertyRepository {
                             ->get();
     }
 
+
+    public function getByLoanUUID( string $loanUUID ) {
+        return KrollProperty::with( self::RELATIONSHIPS_TO_EAGER_LOAD )
+                            ->where( KrollProperty::loan_uuid, $loanUUID )
+                            ->orderBy( KrollProperty::generated_date )
+                            ->get();
+    }
 }
