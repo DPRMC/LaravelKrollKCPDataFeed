@@ -34,6 +34,12 @@ class KrollBondRepository {
                         ->get();
     }
 
+    public function getAllByCUSIPList( array $cusipList ) {
+        return KrollBond::with( self::RELATIONSHIPS_TO_EAGER_LOAD )
+                        ->whereIn( KrollBond::cusip, $cusipList )
+                        ->get();
+    }
+
 
     /**
      * @param string $dealUUID
