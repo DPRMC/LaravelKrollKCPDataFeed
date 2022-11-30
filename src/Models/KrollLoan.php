@@ -109,7 +109,7 @@ class KrollLoan extends AbstractKrollModel {
         self::kltv                                       => 'float',
         self::projected_total_exposure                   => 'float',
         self::master_loan_id_trepp                       => 'integer',
-        self::servicer_loan_id                           => 'integer',
+        self::servicer_loan_id                           => 'string',
         self::prospectus_id                              => 'integer',
         self::number_of_properties                       => 'integer',
         self::maturity_date                              => 'date',
