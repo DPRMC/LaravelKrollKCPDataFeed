@@ -50,7 +50,7 @@ class KrollLoanRepository {
      */
     public function getAllByServicerLoanId( $servicerLoanId ): Collection {
         return KrollLoan::with( self::RELATIONSHIPS_TO_EAGER_LOAD )
-                        ->where( KrollLoan::servicer_loan_id,  $servicerLoanId )
+                        ->where( KrollLoan::servicer_loan_id,  (string)$servicerLoanId )
                         ->orderBy( KrollLoan::generated_date )
                         ->get();
     }
