@@ -59,4 +59,19 @@ class KrollDealRepository {
             ->{KrollDeal::generated_date};
     }
 
+
+    /**
+     * @param bool $loadAllRelationships
+     * @return Collection
+     */
+    public function getAll(bool $loadAllRelationships = false): Collection {
+        $query = KrollDeal::query();
+
+        if($loadAllRelationships):
+            $query->with(self::RELATIONSHIPS_TO_EAGER_LOAD);
+        endif;
+
+        return $query->get();
+    }
+
 }
