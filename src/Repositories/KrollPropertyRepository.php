@@ -10,6 +10,7 @@ use Illuminate\Support\Collection;
 
 /**
  * Class KrollPropertyRepository
+ *
  * @package DPRMC\LaravelKrollKCPDataFeed\Repositories
  */
 class KrollPropertyRepository {
@@ -25,10 +26,16 @@ class KrollPropertyRepository {
 
     /**
      * @param int $daysAgo
+     *
      * @return Collection
      */
-    public function getRecent( int $daysAgo = 7 ): Collection {
-        $earliestDate = Carbon::now( Helper::CARBON_TIMEZONE )->subDays( $daysAgo );
+    public function getRecent( int $daysAgo = 7, Carbon $anchorDate = NULL ): Collection {
+        if ( $anchorDate ):
+            $earliestDate = $anchorDate;
+        else:
+            $earliestDate = Carbon::now( Helper::CARBON_TIMEZONE )->subDays( $daysAgo );
+        endif;
+
         return KrollProperty::with( self::RELATIONSHIPS_TO_EAGER_LOAD )
                             ->where( KrollProperty::generated_date, '>', $earliestDate )
                             ->orderBy( KrollProperty::generated_date )
@@ -38,6 +45,7 @@ class KrollPropertyRepository {
 
     /**
      * @param string $uuid
+     *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getByUuid( string $uuid ): Collection {
@@ -49,6 +57,7 @@ class KrollPropertyRepository {
 
     /**
      * @param string $dealUUID
+     *
      * @return mixed
      */
     public function getByDealUUID( string $dealUUID ) {

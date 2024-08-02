@@ -32,6 +32,9 @@ class KrollRepositoryTest extends BaseTestCase {
      * @group repositories
      */
     public function repositoriesShouldReturnModels() {
+
+        $anchorDateForRecentQueriesInSqLiteDatabase = Carbon::create( 2021, 3, 2, 12, 0, 0 )->subDays( 30 );
+
         $deal      = self::$client->downloadDeal( self::LINK_UUID );
         $factory   = new \DPRMC\LaravelKrollKCPDataFeed\Factories\KrollDealFactory();
         $krollDeal = $factory->deal( $deal, self::LINK_UUID );
@@ -46,26 +49,26 @@ class KrollRepositoryTest extends BaseTestCase {
         $bondRepo     = new KrollBondRepository();
         $bondsByCUSIP = $bondRepo->getByCUSIP( self::CUSIP );
         $bonds        = $bondRepo->getByDealUUID( $dealUUID );
-        $recentBonds  = $bondRepo->getRecent( 30 );
+        $recentBonds  = $bondRepo->getRecent( 30, $anchorDateForRecentQueriesInSqLiteDatabase );
 
 
         $loanGroupRepo    = new KrollLoanGroupRepository();
         $loanGroups       = $loanGroupRepo->getByDealUUID( $dealUUID );
-        $recentLoanGroups = $loanGroupRepo->getRecent( 30 );
+        $recentLoanGroups = $loanGroupRepo->getRecent( 30, $anchorDateForRecentQueriesInSqLiteDatabase );
 
         $loanRepo    = new KrollLoanRepository();
         $loans       = $loanRepo->getByDealUUID( $dealUUID );
-        $recentLoans = $loanRepo->getRecent( 30 );
+        $recentLoans = $loanRepo->getRecent( 30, $anchorDateForRecentQueriesInSqLiteDatabase );
 
         $propertyRepo      = new KrollPropertyRepository();
         $properties        = $propertyRepo->getByDealUUID( $dealUUID );
         $firstProperty     = $properties->first();
         $firstPropertyUUID = $firstProperty->{KrollProperty::uuid};
-        $recentProperties  = $propertyRepo->getRecent( 2 );
+        $recentProperties  = $propertyRepo->getRecent( 2, $anchorDateForRecentQueriesInSqLiteDatabase );
         $propertiesByUUID  = $propertyRepo->getByUuid( $firstPropertyUUID );
 
 
-        $kcp           = new KCP( $krollDeal->{KrollDeal::uuid}, $deals, $bonds, $loanGroups, $loans, $properties );
+        $kcp           = new KCP( $krollDeal->{KrollDeal::uuid} );
         $kcpLoanGroups = new KCPLoanGroups( $loanGroups );
         $kcpProperties = new KCPProperties( $properties );
 

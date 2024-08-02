@@ -25,11 +25,18 @@ class KrollDealRepository {
 
 
     /**
-     * @param int $daysAgo
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @param int                 $daysAgo
+     * @param \Carbon\Carbon|NULL $anchorDate
+     *
+     * @return \Illuminate\Support\Collection
      */
-    public function getRecent( int $daysAgo = 7 ): Collection {
-        $earliestDate = Carbon::now( Helper::CARBON_TIMEZONE )->subDays( $daysAgo );
+    public function getRecent( int $daysAgo = 7 , Carbon $anchorDate = NULL ): Collection {
+        if( $anchorDate):
+            $earliestDate = $anchorDate;
+        else:
+            $earliestDate = Carbon::now( Helper::CARBON_TIMEZONE )->subDays( $daysAgo );
+        endif;
+
         return KrollDeal::with( self::RELATIONSHIPS_TO_EAGER_LOAD )
                         ->where( KrollDeal::generated_date, '>', $earliestDate )
                         ->orderBy( KrollDeal::generated_date )

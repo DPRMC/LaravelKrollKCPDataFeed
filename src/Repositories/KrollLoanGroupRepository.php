@@ -33,8 +33,13 @@ class KrollLoanGroupRepository {
      * @param int $daysAgo
      * @return Collection
      */
-    public function getRecent( int $daysAgo = 7 ): Collection {
-        $earliestDate = Carbon::now( Helper::CARBON_TIMEZONE )->subDays( $daysAgo );
+    public function getRecent( int $daysAgo = 7 , Carbon $anchorDate = NULL ): Collection {
+        if( $anchorDate):
+            $earliestDate = $anchorDate;
+        else:
+            $earliestDate = Carbon::now( Helper::CARBON_TIMEZONE )->subDays( $daysAgo );
+        endif;
+
         return KrollLoanGroup::with( self::RELATIONSHIPS_TO_EAGER_LOAD )
                              ->where( KrollLoanGroup::generated_date, '>', $earliestDate )
                              ->get();

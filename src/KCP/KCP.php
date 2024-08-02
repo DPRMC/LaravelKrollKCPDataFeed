@@ -93,7 +93,7 @@ class KCP {
      * @param string $dealUUID
      * @param array $alerts
      */
-    public function __construct( string $dealUUID, array $alerts = [] ) {
+    public function __construct( string $dealUUID, Iterable $alerts = [] ) {
         $this->dealUUID = $dealUUID;
 
         $dealRepo    = new KrollDealRepository();

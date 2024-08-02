@@ -15,6 +15,7 @@ class KrollHelper {
 
     /**
      * @param string $cusip
+     *
      * @return null
      */
     public static function getDealUUIDFromCUSIP( string $cusip ) {
@@ -43,6 +44,7 @@ class KrollHelper {
 
     /**
      * @param string $dealUUID
+     *
      * @return KCP
      */
     public static function getKCP( string $dealUUID ): KCP {
@@ -61,7 +63,7 @@ class KrollHelper {
         $krollPropertyRepo = new KrollPropertyRepository();
         $properties        = $krollPropertyRepo->getByDealUUID( $dealUUID );
 
-        return new KCP( $dealUUID, $deals, $bonds, $loanGroups, $loans, $properties );
+        return new KCP( $dealUUID );
     }
 
 }

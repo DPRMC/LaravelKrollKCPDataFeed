@@ -10,6 +10,7 @@ use Illuminate\Support\Collection;
 
 /**
  * Class KrollBondRepository
+ *
  * @package DPRMC\LaravelKrollKCPDataFeed\Repositories
  */
 class KrollBondRepository {
@@ -25,6 +26,7 @@ class KrollBondRepository {
 
     /**
      * @param string $cusip
+     *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getByCUSIP( string $cusip ) {
@@ -43,6 +45,7 @@ class KrollBondRepository {
 
     /**
      * @param string $dealUUID
+     *
      * @return mixed
      */
     public function getByDealUUID( string $dealUUID ) {
@@ -54,11 +57,18 @@ class KrollBondRepository {
 
 
     /**
-     * @param int $daysAgo
-     * @return Collection
+     * @param int                 $daysAgo
+     * @param \Carbon\Carbon|NULL $anchorDate
+     *
+     * @return \Illuminate\Support\Collection
      */
-    public function getRecent( int $daysAgo = 7 ): Collection {
-        $earliestDate = Carbon::now( Helper::CARBON_TIMEZONE )->subDays( $daysAgo );
+    public function getRecent( int $daysAgo = 7, Carbon $anchorDate = NULL ): Collection {
+        if ( $anchorDate ):
+            $earliestDate = $anchorDate;
+        else:
+            $earliestDate = Carbon::now( Helper::CARBON_TIMEZONE )->subDays( $daysAgo );
+        endif;
+
         return KrollBond::with( self::RELATIONSHIPS_TO_EAGER_LOAD )
                         ->where( KrollBond::generated_date, '>', $earliestDate )
                         ->orderBy( KrollBond::generated_date )
